@@ -15,7 +15,7 @@ export default function LoginPage() {
         <CardHeader>
           <CardTitle className="text-2xl">Login</CardTitle>
           <CardDescription>
-            This demo uses GitHub for authentication.
+            Login TDT using GitHub for authentication.
           </CardDescription>
         </CardHeader>
         <CardFooter>
