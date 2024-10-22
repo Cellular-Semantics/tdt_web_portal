@@ -1,7 +1,5 @@
 import 'server-only';
 
-// import { neon } from '@neondatabase/serverless';
-// import { drizzle } from 'drizzle-orm/neon-http';
 import { drizzle } from "drizzle-orm/postgres-js";
 import postgres from "postgres";
 import {
@@ -16,7 +14,6 @@ import {
 import { count, eq, ilike } from 'drizzle-orm';
 import { createInsertSchema } from 'drizzle-zod';
 
-// export const db = drizzle(neon(process.env.POSTGRES_URL!));
 console.log("connection string: ", process.env.POSTGRES_URL);
 const connection = postgres(process.env.POSTGRES_URL!);
 export const db = drizzle(connection);

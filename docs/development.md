@@ -59,6 +59,15 @@ CREATE TABLE products (
 );
 ```
 
+```
+CREATE TABLE taxonomies (
+  id SERIAL PRIMARY KEY,
+  name TEXT NOT NULL,
+  url TEXT NOT NULL,
+  last_edited TIMESTAMP NOT NULL
+);
+```
+
 http://localhost:3000/api/seed
 
 # Install PNPM
