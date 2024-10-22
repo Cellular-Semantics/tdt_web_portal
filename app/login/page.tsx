@@ -7,6 +7,7 @@ import {
   CardTitle
 } from '@/components/ui/card';
 import { signIn } from '@/lib/auth';
+import { Github } from 'lucide-react';
 
 export default function LoginPage() {
   return (
@@ -28,7 +29,10 @@ export default function LoginPage() {
             }}
             className="w-full"
           >
-            <Button className="w-full">Sign in with GitHub</Button>
+            <Button className="w-full">
+              <Github className="h-6 w-6 mr-2" />
+              Sign in with GitHub
+            </Button>
           </form>
         </CardFooter>
       </Card>
