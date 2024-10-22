@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useRef } from 'react';
-import { TreeDeciduous, Users, Settings, RefreshCw } from 'lucide-react';
+import { Network, Users, Settings, RefreshCw } from 'lucide-react';
 
 const HomePage = () => {
   const featuresRef = useRef<HTMLDivElement>(null);
@@ -38,7 +38,7 @@ const HomePage = () => {
           <h2 className="text-3xl font-bold text-center mb-12">Features</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             <div className="text-center">
-              <TreeDeciduous className="h-12 w-12 mx-auto text-orange-400 mb-4" />
+              <Network className="h-12 w-12 mx-auto text-orange-400 mb-4" />
               <h3 className="text-xl font-semibold mb-2">Graphical Editor</h3>
               <p>Easily convert informal taxonomies into the standard CAS structure.</p>
             </div>
