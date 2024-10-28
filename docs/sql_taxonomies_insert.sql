@@ -3,7 +3,7 @@ CREATE TABLE taxonomies (
   repo_url TEXT NOT NULL,
   taxon_id TEXT,
   title TEXT NOT NULL,
-  decription TEXT,
+  description TEXT,
   author_orcid TEXT,
   doc_url TEXT,
   purl TEXT,
@@ -12,7 +12,7 @@ CREATE TABLE taxonomies (
   is_public BOOL DEFAULT TRUE
 );
 
-INSERT INTO taxonomies (repo_url, taxon_id, title, decription, author_orcid, doc_url, purl)
+INSERT INTO taxonomies (repo_url, taxon_id, title, description, author_orcid, doc_url, purl)
 VALUES
     (
     'https://github.com/brain-bican/human-brain-cell-atlas_v1_neurons', 
@@ -26,7 +26,7 @@ VALUES
     (
     'https://github.com/brain-bican/human-brain-cell-atlas_v1_non-neuronal', 
     'CS202210140',
-    'HHuman Brain Cell Atlas v1.0 (Non-neuronal)', 
+    'Human Brain Cell Atlas v1.0 (Non-neuronal)', 
     'First draft atlas of human brain transcriptomic cell types: The human brain directs a wide range of complex behaviors ranging from fine motor skills to abstract intelligence and emotion. This broad range of functions is supported by an exceptionally complex cellular and circuit architecture. To create a first draft human brain cell atlas, high-throughput single-nucleus RNA sequencing was used to systematically survey cells across the entire adult human brain in three postmortem donors. Over three million nuclei were sampled from approximately 100 dissections across the forebrain, midbrain, and hindbrain. Analysis of these data showed regional diversity in that cellular organization exhibited regional diversity at multiple scales, identifying 30 superclusters, 461 clusters and 3313 subclusters. As the first single-cell transcriptomic census of the entire human brain, this atlas provides a resource for understanding the molecular diversity of the human brain in health and disease. The Human Brain Cell Atlas v1.0 is presented for visualization and data mining through the Chan Zuckerberg Initiative''s CellxGene application, with the following biologically meaningful partitions: 1. Neuronal and non-neuronal cell types 2. Supercluster-specific groupings (''Supercluster: '') 3.Brain region-specific groupings (''Dissection: ''), ordered by the adult human brain anatomical reference atlas ontology in Ding et al. (2016)',
     'https://orcid.org/0000-0001-7620-8973',
     'https://purl.brain-bican.org/taxonomy/CS202210140/CS202210140_non-neuronal/',

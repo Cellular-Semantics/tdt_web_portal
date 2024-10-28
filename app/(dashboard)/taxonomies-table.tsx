@@ -15,7 +15,7 @@ import {
   CardHeader,
   CardTitle
 } from '@/components/ui/card';
-import { Product } from './product';
+import { Taxonomy } from './taxonomy';
 import { SelectProduct } from '@/lib/db';
 import { useRouter } from 'next/navigation';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
@@ -44,10 +44,7 @@ export function TaxonomiesTable({
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Products</CardTitle>
-        <CardDescription>
-          Manage your products and view their sales performance.
-        </CardDescription>
+        <CardTitle>Taxonomies</CardTitle>
       </CardHeader>
       <CardContent>
         <Table>
@@ -70,7 +67,7 @@ export function TaxonomiesTable({
           </TableHeader>
           <TableBody>
             {products.map((product) => (
-              <Product key={product.id} product={product} />
+              <Taxonomy key={product.id} product={product} />
             ))}
           </TableBody>
         </Table>

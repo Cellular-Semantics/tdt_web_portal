@@ -21,7 +21,7 @@ export default async function RootLayout({
       <body className="flex min-h-screen w-full flex-col">
         <SessionProvider session={session}>
           {children}
-          </SessionProvider>
+        </SessionProvider>
         </body>
       <Analytics />
     </html>

@@ -13,7 +13,7 @@ import { TableCell, TableRow } from '@/components/ui/table';
 import { SelectProduct } from '@/lib/db';
 import { deleteProduct } from './actions';
 
-export function Product({ product }: { product: SelectProduct }) {
+export function Taxonomy({ product }: { product: SelectProduct }) {
   return (
     <TableRow>
       <TableCell className="hidden sm:table-cell">

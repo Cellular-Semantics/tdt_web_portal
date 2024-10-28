@@ -29,6 +29,9 @@ const HomePage = () => {
             >
               Learn More
             </button>
+            <Link href="/catalog" className="px-6 py-3 bg-orange-400 text-white font-semibold rounded-md shadow-md hover:bg-gray-100 transition duration-300">
+                Catalog
+            </Link>
           </div>
         </div>
       </div>

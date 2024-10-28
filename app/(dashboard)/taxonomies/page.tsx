@@ -1,7 +1,7 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { File, PlusCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { ProductsTable } from '../products-table';
+import { TaxonomiesTable } from '../taxonomies-table';
 import { getProducts } from '@/lib/db';
 import { auth } from '@/lib/auth'
 
@@ -22,7 +22,7 @@ export default async function TaxonomiesPage(
     <Tabs defaultValue="all">
       <div>
         {session ? (
-          <p>My email is {session.user?.email}</p>
+          <p>{JSON.stringify(session.user, null, 2)}</p>
         ) : (
           <p>Session not available</p>
         )}
@@ -38,7 +38,7 @@ export default async function TaxonomiesPage(
         </div>
       </div>
       <TabsContent value="all">
-        <ProductsTable
+        <TaxonomiesTable
           products={products}
           offset={newOffset ?? 0}
           totalProducts={totalProducts}
