@@ -10,10 +10,19 @@ import {
 import { TaxonomyCard } from '../taxonomy-card';
 import { getPublicTaxonomies } from '@/lib/db';
 
-export default async function CatalogPage(){
-    const { taxonomies, totalTaxonomies } = await getPublicTaxonomies(
+export default async function CatalogPage(
+    props: {
+        searchParams: Promise<{ q: string; offset: string }>;
+      }
+){
+    const searchParams = await props.searchParams;
+    const search = searchParams.q ?? '';
+    const { taxonomies, totalTaxonomies } = await getPublicTaxonomies(search, 
         Number(0)
     );
+    const description = totalTaxonomies >= 0 
+        ? `Explore ${totalTaxonomies} publicly available BRAIN-BICAN taxonomies.` 
+        : `'${search}' search results`;
     return (
         <Card>
         <CardHeader>
@@ -21,7 +30,7 @@ export default async function CatalogPage(){
           <p></p>
           <p></p>
           <CardDescription>
-          Explore {totalTaxonomies} publicly available BRAIN-BICAN taxonomies. 
+          {description} 
           </CardDescription>
         </CardHeader>
         <CardContent>

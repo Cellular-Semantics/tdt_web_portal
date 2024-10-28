@@ -63,24 +63,7 @@ export async function getTaxonomies(
   newOffset: number | null;
   totalTaxonomies: number;
 }> {
-  // Always search the full table, not per page
-  if (search) {
-    return {
-      taxonomies: await db
-        .select()
-        .from(taxonomies)
-        .where(
-          and(
-            ilike(taxonomies.title, `%${search}%`),
-            eq(taxonomies.active, true)
-          )
-        )
-        .limit(1000),
-      newOffset: null,
-      totalTaxonomies: 0
-    };
-  }
-
+  
   if (offset === null) {
     return { taxonomies: [], newOffset: null, totalTaxonomies: 0 };
   }
@@ -97,11 +80,33 @@ export async function getTaxonomies(
 }
 
 export async function getPublicTaxonomies(
+  search: string,
   offset: number
 ): Promise<{
   taxonomies: SelectTaxonomy[];
   totalTaxonomies: number;
 }> {
+
+    // Always search the full table, not per page
+    if (search) {
+      return {
+        taxonomies: await db
+          .select()
+          .from(taxonomies)
+          .where(
+            and(
+              or(
+                ilike(taxonomies.title, `%${search}%`),
+                ilike(taxonomies.description, `%${search}%`)
+              ),
+              eq(taxonomies.active, true),
+              eq(taxonomies.is_public, true)
+            )
+          )
+          .limit(1000),
+        totalTaxonomies: -1
+      };
+    }
 
   if (offset === null) {
     return { taxonomies: [], totalTaxonomies: 0 };
