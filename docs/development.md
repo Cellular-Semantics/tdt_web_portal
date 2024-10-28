@@ -59,14 +59,10 @@ CREATE TABLE products (
 );
 ```
 
-```
-CREATE TABLE taxonomies (
-  id SERIAL PRIMARY KEY,
-  name TEXT NOT NULL,
-  url TEXT NOT NULL,
-  last_edited TIMESTAMP NOT NULL
-);
-```
+
+Create tables and insert data:
+- see sql_taxonomies_insert.sql
+- see sql_user_taxonomies_insert.sql
 
 http://localhost:3000/api/seed
 
