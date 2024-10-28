@@ -11,6 +11,7 @@ import Collapse from '@mui/material/Collapse';
 import Avatar from '@mui/material/Avatar';
 import IconButton, { IconButtonProps } from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
 import { red } from '@mui/material/colors';
 import { Github, BookOpen, User } from 'lucide-react';
 
@@ -51,9 +52,16 @@ export function TaxonomyCard({ taxonomy }: { taxonomy: SelectTaxonomy }) {
             <br />
             <div>
                 {taxonomy.purl && (
-                <Typography variant="body2" sx={{ color: 'text.secondary', mb: 1.5 }}>
-                    PURL: {taxonomy.purl}
-                </Typography>
+                <>
+                    <Box component="span" sx={{ backgroundColor: 'darkgrey', borderRadius: '12px', padding: '2px 8px', color: 'white', display: 'inline-block', marginRight: '8px', fontSize: '0.875rem' }}>
+                        PURL
+                    </Box>
+                    <Typography variant="body2" sx={{ color: 'text.secondary', mb: 1.5, display: 'inline' }}>
+                        <a href={taxonomy.purl} target="_blank" rel="noopener noreferrer" style={{ color: 'inherit', textDecoration: 'none' }}>
+                            {taxonomy.purl}
+                        </a>
+                    </Typography>
+                </>
                 )}
             </div>
         </CardContent>
