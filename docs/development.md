@@ -73,3 +73,15 @@ pnpm dev
 ```
 
 You should now be able to access the application at http://localhost:3000.
+
+# Deployment
+
+To build and deploy the dokcer image follow these steps:
+
+```
+docker build --no-cache -t tdt_portal .
+```
+
+```
+docker run -p 3000:3000 -e POSTGRES_URL='postgresql://postgres:PASSWORD_HERE@host.docker.internal:5432/tdt_db' tdt_portal 
+```
