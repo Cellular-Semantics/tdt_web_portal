@@ -45,8 +45,8 @@ see: https://medium.com/@mateus2050/setting-up-postgresql-and-pgadmin-using-dock
 Create DB `tdt_db` using pgAdmin
 
 Create tables and populate data:
-- see sql_taxonomies_insert.sql
-- see sql_user_taxonomies_insert.sql
+- see [sql_taxonomies_insert.sql](/docs/sql_taxonomies_insert.sql)
+- see [sql_user_taxonomies_insert.sql](/docs/sql_user_taxonomies_insert.sql)
 
 # Install PNPM
 
