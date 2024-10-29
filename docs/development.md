@@ -2,6 +2,16 @@
 
 This project is Forked from https://github.com/vercel/nextjs-postgres-nextauth-tailwindcss-template
 
+Technology stack:
+- Framework - [Next.js (App Router)](https://nextjs.org)
+- Language - [TypeScript](https://www.typescriptlang.org)
+- Auth - [Auth.js](https://authjs.dev)
+- Database - [Postgres]
+- Styling - [Tailwind CSS](https://tailwindcss.com)
+- Components - [Shadcn UI](https://ui.shadcn.com/)
+- Analytics - [Vercel Analytics](https://vercel.com/analytics)
+- Formatting - [Prettier](https://prettier.io)
+
 # GitHub Application
 
 Follow these steps to create and configure the GitHub OAuth: https://authjs.dev/guides/configuring-github
@@ -34,37 +44,9 @@ see: https://medium.com/@mateus2050/setting-up-postgresql-and-pgadmin-using-dock
 
 Create DB `tdt_db` using pgAdmin
 
-then create user table:
-
-```
-CREATE TABLE users (
-  id SERIAL PRIMARY KEY,
-  email VARCHAR(255) NOT NULL,
-  name VARCHAR(255),
-  username VARCHAR(255)
-);
-```
-
-```
-CREATE TYPE status AS ENUM ('active', 'inactive', 'archived');
-
-CREATE TABLE products (
-  id SERIAL PRIMARY KEY,
-  image_url TEXT NOT NULL,
-  name TEXT NOT NULL,
-  status status NOT NULL,
-  price NUMERIC(10, 2) NOT NULL,
-  stock INTEGER NOT NULL,
-  available_at TIMESTAMP NOT NULL
-);
-```
-
-
-Create tables and insert data:
+Create tables and populate data:
 - see sql_taxonomies_insert.sql
 - see sql_user_taxonomies_insert.sql
-
-http://localhost:3000/api/seed
 
 # Install PNPM
 
