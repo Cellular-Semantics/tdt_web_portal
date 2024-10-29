@@ -14,6 +14,7 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import { red } from '@mui/material/colors';
 import { Github, BookOpen, User } from 'lucide-react';
+import Tooltip from '@mui/material/Tooltip';
 
 const warmColors = [
     "#FFD1DC", "#D4A5A5", "#AEC6CF", "#77DD77",
@@ -66,24 +67,30 @@ export function TaxonomyCard({ taxonomy }: { taxonomy: SelectTaxonomy }) {
             </div>
         </CardContent>
         <CardActions disableSpacing>
-            <a href={taxonomy.repo_url} target="_blank" rel="noopener noreferrer">
-                <IconButton aria-label="taxonomy repository">
-                    <Github />
-                </IconButton>
-            </a>
+            <Tooltip title="View GitHub repository">
+                <a href={taxonomy.repo_url} target="_blank" rel="noopener noreferrer">
+                    <IconButton aria-label="taxonomy repository">
+                        <Github />
+                    </IconButton>
+                </a>
+            </Tooltip>
             {taxonomy.doc_url && (
-            <a href={taxonomy.doc_url} target="_blank" rel="noopener noreferrer">
-                <IconButton aria-label="online documentation">
-                    <BookOpen />
-                </IconButton>
-            </a>
+            <Tooltip title="View documentation">
+                <a href={taxonomy.doc_url} target="_blank" rel="noopener noreferrer">
+                    <IconButton aria-label="online documentation">
+                        <BookOpen />
+                    </IconButton>
+                </a>
+            </Tooltip>
             )}
             {taxonomy.author_orcid && (
-            <a href={taxonomy.author_orcid} target="_blank" rel="noopener noreferrer">
-                <IconButton aria-label="author">
-                    <User />
-                </IconButton>
-            </a>
+            <Tooltip title="View author">
+                <a href={taxonomy.author_orcid} target="_blank" rel="noopener noreferrer">
+                    <IconButton aria-label="author">
+                        <User />
+                    </IconButton>
+                </a>
+            </Tooltip>
             )}
         </CardActions>
         </Card>

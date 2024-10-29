@@ -63,7 +63,7 @@ export async function getTaxonomies(
   newOffset: number | null;
   totalTaxonomies: number;
 }> {
-  
+
   if (offset === null) {
     return { taxonomies: [], newOffset: null, totalTaxonomies: 0 };
   }
@@ -150,11 +150,12 @@ export async function getUserTaxonomies(
     return { taxonomies: [], newOffset: null, totalTaxonomies: 0 };
   }
 
-  const sq = db.select().from(user_taxonomies).where(eq(user_taxonomies.user_email, `%${userEmail}%`)).as('sq');
+  const sq = db.select().from(user_taxonomies).where(eq(user_taxonomies.user_email, `${userEmail}`)).as('sq');
 
   let totalTaxonomies = await db
                           .select({ count: count() })
                           .from(taxonomies)
+                          .innerJoin(sq, eq(sq.taxonomy_id, taxonomies.id))
                           .where(eq(taxonomies.active, true));
 
   let moreTaxonomies = await db
@@ -162,7 +163,7 @@ export async function getUserTaxonomies(
                           .from(taxonomies)
                           .innerJoin(sq, eq(sq.taxonomy_id, taxonomies.id))
                           .where(eq(taxonomies.active, true))
-                          .limit(5)
+                          .limit(10)
                           .offset(offset);
   // Flatten the result
   const flattenedTaxonomies = moreTaxonomies.map((result) => ({
@@ -179,7 +180,7 @@ export async function getUserTaxonomies(
     is_public: result.taxonomies.is_public,
   }));
 
-  const newOffset = flattenedTaxonomies.length >= 5 ? offset + 5 : null;
+  const newOffset = flattenedTaxonomies.length >= 10 ? offset + 10 : null;
 
   return {
     taxonomies: flattenedTaxonomies,

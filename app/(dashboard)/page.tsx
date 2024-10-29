@@ -20,16 +20,16 @@ const HomePage = () => {
           <h1 className="text-5xl font-bold text-white mb-4">Taxonomy Development Tools</h1>
           <h2 className="text-2xl text-white mb-8">Build, curate, and publish BICAN taxonomies effortlessly.</h2>
           <div className="flex justify-center space-x-4">
-            <Link href="/taxonomies" className="px-6 py-3 bg-white text-orange-400 font-semibold rounded-md shadow-md hover:bg-gray-100 transition duration-300">
+            <Link href="/taxonomies" className="px-6 py-3 bg-white text-orange-400 font-semibold rounded-md shadow-md hover:bg-gray-100 transition duration-300 min-w-[150px] text-center">
                 Get Started
             </Link>
             <button
               onClick={scrollToFeatures}
-              className="px-6 py-3 bg-white text-orange-400 font-semibold rounded-md shadow-md hover:bg-gray-100 transition duration-300"
+              className="px-6 py-3 bg-white text-orange-400 font-semibold rounded-md shadow-md hover:bg-gray-100 transition duration-300 min-w-[150px] text-center"
             >
               Learn More
             </button>
-            <Link href="/catalog" className="px-6 py-3 bg-orange-400 text-white font-semibold rounded-md shadow-md hover:bg-gray-100 transition duration-300">
+            <Link href="/catalog" className="px-6 py-3 bg-orange-400 text-white font-semibold rounded-md shadow-md hover:bg-gray-100 transition duration-300 min-w-[150px] text-center">
                 Catalog
             </Link>
           </div>

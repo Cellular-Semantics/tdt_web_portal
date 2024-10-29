@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import {
   Home,
   LineChart,
@@ -60,7 +61,10 @@ function DesktopNav() {
           href="/"
           className="group flex h-9 w-9 shrink-0 items-center justify-center gap-2 rounded-full bg-primary text-lg font-semibold text-primary-foreground md:h-8 md:w-8 md:text-base"
         >
-          <VercelLogo className="h-3 w-3 transition-all group-hover:scale-110" />
+          {/* <VercelLogo className="h-3 w-3 transition-all group-hover:scale-110" /> */}
+          <div className="bg-white rounded-full items-center justify-center">
+            <Image src="/taxonomy.png" alt="Taxonomy Development Tools" width={32} height={32} className="transition-all group-hover:scale-110 object-cover" />
+          </div>
           <span className="sr-only">TDT</span>
         </Link>
 
@@ -76,9 +80,6 @@ function DesktopNav() {
           <Network className="h-5 w-5" />
         </NavItem>
 
-        <NavItem href="/customers" label="Customers">
-          <Users2 className="h-5 w-5" />
-        </NavItem>
       </nav>
       <nav className="mt-auto flex flex-col items-center gap-4 px-2 sm:py-5">
         <Tooltip>
@@ -124,25 +125,18 @@ function MobileNav() {
             Dashboard
           </Link>
           <Link
-            href="#"
+            href="/catalog"
             className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
           >
             <ShoppingCart className="h-5 w-5" />
-            Taxonomies
+            Taxonomies Catalog
           </Link>
           <Link
-            href="#"
+            href="/taxonomies"
             className="flex items-center gap-4 px-2.5 text-foreground"
           >
             <Package className="h-5 w-5" />
-            Products
-          </Link>
-          <Link
-            href="#"
-            className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
-          >
-            <Users2 className="h-5 w-5" />
-            Customers
+            My Taxonomies
           </Link>
           <Link
             href="#"

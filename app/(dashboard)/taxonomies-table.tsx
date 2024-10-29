@@ -16,22 +16,22 @@ import {
   CardTitle
 } from '@/components/ui/card';
 import { Taxonomy } from './taxonomy';
-import { SelectProduct } from '@/lib/db';
+import { SelectTaxonomy } from '@/lib/db';
 import { useRouter } from 'next/navigation';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 export function TaxonomiesTable({
-  products,
+  taxonomies,
   offset,
-  totalProducts
+  totalTaxonomies
 }: {
-  products: SelectProduct[];
+  taxonomies: SelectTaxonomy[];
   offset: number;
-  totalProducts: number;
+  totalTaxonomies: number;
 }) {
   let router = useRouter();
-  let productsPerPage = 5;
+  let taxonomiesPerPage = 10;
 
   function prevPage() {
     router.back();
@@ -44,30 +44,26 @@ export function TaxonomiesTable({
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Taxonomies</CardTitle>
+        <CardTitle>My Taxonomies</CardTitle>
       </CardHeader>
       <CardContent>
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead className="hidden w-[100px] sm:table-cell">
-                <span className="sr-only">Image</span>
+              <TableHead className="w-[500px] sm:table-cell">
+                Title
               </TableHead>
-              <TableHead>Name</TableHead>
+              <TableHead>GitHub Repository</TableHead>
               <TableHead>Status</TableHead>
-              <TableHead className="hidden md:table-cell">Price</TableHead>
-              <TableHead className="hidden md:table-cell">
-                Total Sales
-              </TableHead>
-              <TableHead className="hidden md:table-cell">Created at</TableHead>
+              <TableHead className="hidden md:table-cell">Explore</TableHead>
               <TableHead>
                 <span className="sr-only">Actions</span>
               </TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
-            {products.map((product) => (
-              <Taxonomy key={product.id} product={product} />
+            {taxonomies.map((taxonomy) => (
+              <Taxonomy key={taxonomy.id} taxonomy={taxonomy} />
             ))}
           </TableBody>
         </Table>
@@ -77,9 +73,9 @@ export function TaxonomiesTable({
           <div className="text-xs text-muted-foreground">
             Showing{' '}
             <strong>
-              {Math.min(offset - productsPerPage, totalProducts) + 1}-{offset}
+              {offset} - {Math.max(offset + taxonomiesPerPage, totalTaxonomies)}
             </strong>{' '}
-            of <strong>{totalProducts}</strong> products
+            of <strong>{totalTaxonomies}</strong> taxonomies
           </div>
           <div className="flex">
             <Button
@@ -87,7 +83,7 @@ export function TaxonomiesTable({
               variant="ghost"
               size="sm"
               type="submit"
-              disabled={offset === productsPerPage}
+              disabled={offset < taxonomiesPerPage}
             >
               <ChevronLeft className="mr-2 h-4 w-4" />
               Prev
@@ -97,7 +93,7 @@ export function TaxonomiesTable({
               variant="ghost"
               size="sm"
               type="submit"
-              disabled={offset + productsPerPage > totalProducts}
+              disabled={offset + taxonomiesPerPage > totalTaxonomies}
             >
               Next
               <ChevronRight className="ml-2 h-4 w-4" />

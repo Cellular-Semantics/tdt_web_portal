@@ -7,11 +7,12 @@ import {
   CardTitle
 } from '@/components/ui/card';
 import { signIn } from '@/lib/auth';
-import { Github } from 'lucide-react';
+import { Github, ArrowLeft } from 'lucide-react';
+import Link from 'next/link';
 
 export default function LoginPage() {
   return (
-    <div className="min-h-screen flex justify-center items-start md:items-center p-8">
+    <div className="min-h-screen flex flex-col justify-center items-center p-8">
       <Card className="w-full max-w-sm">
         <CardHeader>
           <CardTitle className="text-2xl">Login</CardTitle>
@@ -36,6 +37,14 @@ export default function LoginPage() {
           </form>
         </CardFooter>
       </Card>
+      <div className="w-full max-w-sm flex justify-end mt-4">
+        <Link href="/" className="w-full max-w-[fit-content]">
+          <Button variant="link" className="w-full">
+            <ArrowLeft className="h-6 w-6 mr-2" />
+            Return to Home Page
+          </Button>
+        </Link>
+      </div>
     </div>
   );
 }

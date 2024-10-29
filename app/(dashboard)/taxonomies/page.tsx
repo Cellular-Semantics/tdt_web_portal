@@ -2,31 +2,28 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { File, PlusCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { TaxonomiesTable } from '../taxonomies-table';
-import { getProducts } from '@/lib/db';
+import { getUserTaxonomies } from '@/lib/db';
 import { auth } from '@/lib/auth'
 
 export default async function TaxonomiesPage(
   props: {
-    searchParams: Promise<{ q: string; offset: string }>;
+    searchParams: Promise<{ offset: string }>;
   }
 ) {
   const searchParams = await props.searchParams;
-  const search = searchParams.q ?? '';
   const offset = searchParams.offset ?? 0;
   const session = await auth()
-  const { products, newOffset, totalProducts } = await getProducts(
-    search,
+  
+  const userEmail = session?.user?.email ?? '';
+  const { taxonomies, newOffset, totalTaxonomies } = await getUserTaxonomies(
+    userEmail,
     Number(offset)
   );
+  console.log(session)
+  console.log(taxonomies)
+  
   return (
     <Tabs defaultValue="all">
-      <div>
-        {session ? (
-          <p>{JSON.stringify(session.user, null, 2)}</p>
-        ) : (
-          <p>Session not available</p>
-        )}
-        </div>
       <div className="flex items-center">
         <div className="ml-auto flex items-center gap-2">
           <Button size="sm" className="h-8 gap-1">
@@ -39,9 +36,9 @@ export default async function TaxonomiesPage(
       </div>
       <TabsContent value="all">
         <TaxonomiesTable
-          products={products}
+          taxonomies={taxonomies}
           offset={newOffset ?? 0}
-          totalProducts={totalProducts}
+          totalTaxonomies={totalTaxonomies}
         />
       </TabsContent>
     </Tabs>
