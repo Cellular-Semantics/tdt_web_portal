@@ -74,6 +74,7 @@ export function TaxonomiesTable({
             Showing{' '}
             <strong>
               {offset} - {Math.max(offset + taxonomiesPerPage, totalTaxonomies)}
+              {/* {Math.max(0, Math.min(offset - taxonomiesPerPage, totalTaxonomies) + 1)}-{offset} */}
             </strong>{' '}
             of <strong>{totalTaxonomies}</strong> taxonomies
           </div>
