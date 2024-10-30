@@ -1,4 +1,4 @@
-CREATE TABLE taxonomies (
+CREATE TABLE IF NOT EXISTS taxonomies (
   id SERIAL PRIMARY KEY,
   repo_url TEXT NOT NULL,
   taxon_id TEXT,
