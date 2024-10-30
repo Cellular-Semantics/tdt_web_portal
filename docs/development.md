@@ -76,7 +76,15 @@ You should now be able to access the application at http://localhost:3000.
 
 # Deployment
 
-To build and deploy the dokcer image follow these steps:
+## Docker Compose
+
+```
+docker-compose --env-file ./docker-compose.env up --build
+```
+
+## Docker
+
+To build and deploy the docker image follow these steps:
 
 ```
 docker build --no-cache -t tdt_portal .

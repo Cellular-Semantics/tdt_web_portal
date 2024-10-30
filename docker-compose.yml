@@ -1,0 +1,56 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:latest
+    container_name: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-yourpassword}
+      POSTGRES_DB: tdt_db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./docs/sql_taxonomies_insert.sql:/docker-entrypoint-initdb.d/sql_taxonomies_insert.sql
+      - ./docs/sql_user_taxonomies_insert.sql:/docker-entrypoint-initdb.d/sql_user_taxonomies_insert.sql
+    networks:
+      - tdt_network
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "5050:80"
+    depends_on:
+      - postgres
+    networks:
+      - tdt_network
+
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: web_portal
+    ports:
+      - "3000:3000"
+    environment:
+      POSTGRES_URL: postgresql://postgres:${POSTGRES_PASSWORD}@postgres:5432/tdt_db
+      NEXTAUTH_URL: ${NEXTAUTH_URL:-http://localhost:3000}
+      AUTH_TRUST_HOST: ${NEXTAUTH_URL:-http://localhost:3000}
+      AUTH_SECRET: ${NEXTAUTH_SECRET}
+      NEXTAUTH_SECRET: ${NEXTAUTH_SECRET}
+      AUTH_GITHUB_ID: ${AUTH_GITHUB_ID}
+      AUTH_GITHUB_SECRET: ${AUTH_GITHUB_SECRET}
+    depends_on:
+      - postgres
+    networks:
+      - tdt_network
+
+volumes:
+  postgres_data:
+
+networks:
+  tdt_network:
+    driver: bridge
