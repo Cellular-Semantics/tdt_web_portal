@@ -1,9 +1,9 @@
 version: '3.8'
 
 services:
-  postgres:
+  tdt_postgres:
     image: postgres:latest
-    container_name: postgres
+    container_name: tdt_postgres
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
@@ -17,9 +17,9 @@ services:
     networks:
       - tdt_network
 
-  pgadmin:
+  tdt_pgadmin:
     image: dpage/pgadmin4
-    container_name: pgadmin
+    container_name: tdt_pgadmin
     environment:
       PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
       PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
@@ -29,7 +29,7 @@ services:
       # Session data, user files, config files, config database go here.
       - pgadmin_data:/var/lib/pgadmin
     depends_on:
-      - postgres
+      - tdt_postgres
     networks:
       - tdt_network
 
@@ -37,11 +37,11 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: web_portal
+    container_name: tdt_web_portal
     ports:
       - "3000:3000"
     environment:
-      POSTGRES_URL: postgresql://postgres:${POSTGRES_PASSWORD}@postgres:5432/tdt_db
+      POSTGRES_URL: postgresql://postgres:${POSTGRES_PASSWORD}@tdt_postgres:5432/tdt_db
       NEXTAUTH_URL: ${NEXTAUTH_URL:-http://localhost:3000}
       AUTH_TRUST_HOST: ${NEXTAUTH_URL:-http://localhost:3000}
       AUTH_SECRET: ${NEXTAUTH_SECRET}
@@ -49,7 +49,7 @@ services:
       AUTH_GITHUB_ID: ${AUTH_GITHUB_ID}
       AUTH_GITHUB_SECRET: ${AUTH_GITHUB_SECRET}
     depends_on:
-      - postgres
+      - tdt_postgres
     networks:
       - tdt_network
 

@@ -82,7 +82,9 @@ You should now be able to access the application at http://localhost:3000.
 docker-compose --env-file ./docker-compose.env up --build
 ```
 
-## Docker
+use `--detach` to run containers in the background.
+
+## Docker (tdt_web_portal only)
 
 To build and deploy the docker image follow these steps:
 
