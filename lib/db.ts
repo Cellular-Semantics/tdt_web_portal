@@ -69,7 +69,7 @@ export async function getTaxonomies(
   }
 
   let totalTaxonomies = await db.select({ count: count() }).from(taxonomies).where(eq(taxonomies.active, true));
-  let moreTaxonomies = await db.select().from(taxonomies).where(eq(taxonomies.active, true)).limit(5).offset(offset);
+  let moreTaxonomies = await db.select().from(taxonomies).where(eq(taxonomies.active, true)).offset(offset);
   let newOffset = moreTaxonomies.length >= 5 ? offset + 5 : null;
 
   return {
@@ -187,6 +187,13 @@ export async function getUserTaxonomies(
     newOffset,
     totalTaxonomies: totalTaxonomies[0].count
   };
+}
+
+export async function addUserTaxonomy(userEmail: string, taxonomyId: number) {
+  await db.insert(user_taxonomies).values({
+    user_email: userEmail,
+    taxonomy_id: taxonomyId,
+  });
 }
 
 export async function getProducts(

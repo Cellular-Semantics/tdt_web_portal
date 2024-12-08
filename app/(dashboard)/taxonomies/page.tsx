@@ -3,7 +3,8 @@ import { File, PlusCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { TaxonomiesTable } from '../taxonomies-table';
 import { getUserTaxonomies } from '@/lib/db';
-import { auth } from '@/lib/auth'
+import { auth } from '@/lib/auth';
+import AddTaxonModal from 'components/modal/add_taxonomy_modal';
 
 export default async function TaxonomiesPage(
   props: {
@@ -12,26 +13,21 @@ export default async function TaxonomiesPage(
 ) {
   const searchParams = await props.searchParams;
   const offset = searchParams.offset ?? 0;
-  const session = await auth()
+  const session = await auth();
   
   const userEmail = session?.user?.email ?? '';
   const { taxonomies, newOffset, totalTaxonomies } = await getUserTaxonomies(
     userEmail,
     Number(offset)
   );
-  console.log(session)
-  console.log(taxonomies)
+  console.log(session);
+  console.log(taxonomies);
   
   return (
     <Tabs defaultValue="all">
       <div className="flex items-center">
         <div className="ml-auto flex items-center gap-2">
-          <Button size="sm" className="h-8 gap-1">
-            <PlusCircle className="h-3.5 w-3.5" />
-            <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
-              Add Taxonomy
-            </span>
-          </Button>
+          <AddTaxonModal userEmail={userEmail} />
         </div>
       </div>
       <TabsContent value="all">
