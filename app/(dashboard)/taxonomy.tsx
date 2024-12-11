@@ -15,6 +15,17 @@ import { deleteProduct } from './actions';
 
 export function Taxonomy({ taxonomy }: { taxonomy: SelectTaxonomy }) {
   const status = taxonomy.is_public == true ? 'public' : 'private'; 
+
+  const handleExploreClick = () => {
+    // const baseUrl = process.env.TDT_API_URL;
+    const baseUrl = process.env.NEXT_PUBLIC_TDT_API_URL;
+    const repoUrl = taxonomy.repo_url;
+    const repoName = repoUrl.split('/').pop();
+    const fullUrl = `${baseUrl}/browser/${repoName}/annotation`;
+    console.log(fullUrl);
+    window.open(fullUrl, '_blank');
+  };
+
   return (
     <TableRow>
       <TableCell className="hidden sm:table-cell">
@@ -31,7 +42,7 @@ export function Taxonomy({ taxonomy }: { taxonomy: SelectTaxonomy }) {
         </Badge>
       </TableCell>
       <TableCell className="hidden md:table-cell">
-        <Button variant="default">Explore</Button>
+        <Button variant="default" onClick={handleExploreClick}>Explore</Button>
       </TableCell>
       <TableCell>
         <DropdownMenu>
