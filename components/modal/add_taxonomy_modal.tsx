@@ -31,13 +31,13 @@ export default function AddTaxonModal({ userEmail }: AddTaxonModalProps) {
 
   useEffect(() => {
     async function fetchTaxonomies() {
-      const response = await fetch('/api/taxonomies');
+      const response = await fetch(`/api/addibleTaxonomies?userEmail=${encodeURIComponent(userEmail)}`);
       const taxonomies = await response.json();
       console.log('Fetched taxonomies:', taxonomies);
       setTaxonomies(taxonomies);
     }
     fetchTaxonomies();
-  }, []);
+  }, [userEmail]);
 
   const onAddTaxonomy = async () => {
     if (selectedTaxonomy === null) return;

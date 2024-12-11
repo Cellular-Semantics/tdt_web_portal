@@ -12,7 +12,7 @@ import {
   serial,
   boolean
 } from 'drizzle-orm/pg-core';
-import { count, eq, ilike, sql, and, or } from 'drizzle-orm';
+import { count, eq, ilike, sql, and, or, notInArray } from 'drizzle-orm';
 import { createInsertSchema } from 'drizzle-zod';
 
 console.log("connection string: ", process.env.POSTGRES_URL);
@@ -39,21 +39,8 @@ export const user_taxonomies = pgTable('user_taxonomies', {
   taxonomy_id: integer('taxonomy_id').notNull().references(() => taxonomies.id),
 });
 
-export const statusEnum = pgEnum('status', ['active', 'inactive', 'archived']);
-
-export const products = pgTable('products', {
-  id: serial('id').primaryKey(),
-  imageUrl: text('image_url').notNull(),
-  name: text('name').notNull(),
-  status: statusEnum('status').notNull(),
-  price: numeric('price', { precision: 10, scale: 2 }).notNull(),
-  stock: integer('stock').notNull(),
-  availableAt: timestamp('available_at').notNull()
-});
 
 export type SelectTaxonomy = typeof taxonomies.$inferSelect;
-export type SelectProduct = typeof products.$inferSelect;
-export const insertProductSchema = createInsertSchema(products);
 
 export async function getTaxonomies(
   search: string,
@@ -189,6 +176,32 @@ export async function getUserTaxonomies(
   };
 }
 
+/**
+ * List of taxonomies that the user can add (all taxonomies - user taxonomies).
+ * @param userEmail current user
+ * @returns all taxonomies - user taxonomies
+ */
+export async function getUnregisteredTaxonomiesForUser(
+  userEmail: string
+): Promise<{
+  taxonomies: SelectTaxonomy[];
+}> {
+  // const sq = db.select().from(user_taxonomies).where(eq(user_taxonomies.user_email, `${userEmail}`)).as('sq');
+  const registeredTaxonomyIds = await db
+    .select({ taxonomyId: user_taxonomies.taxonomy_id })
+    .from(user_taxonomies)
+    .where(eq(user_taxonomies.user_email, userEmail));
+
+  const unregisteredTaxonomies = await db
+    .select()
+    .from(taxonomies)
+    .where(notInArray(taxonomies.id, registeredTaxonomyIds.map(row => row.taxonomyId)));
+
+  return {
+    taxonomies: unregisteredTaxonomies
+  };
+}
+
 export async function addUserTaxonomy(userEmail: string, taxonomyId: number) {
   await db.insert(user_taxonomies).values({
     user_email: userEmail,
@@ -196,42 +209,3 @@ export async function addUserTaxonomy(userEmail: string, taxonomyId: number) {
   });
 }
 
-export async function getProducts(
-  search: string,
-  offset: number
-): Promise<{
-  products: SelectProduct[];
-  newOffset: number | null;
-  totalProducts: number;
-}> {
-  // Always search the full table, not per page
-  if (search) {
-    return {
-      products: await db
-        .select()
-        .from(products)
-        .where(ilike(products.name, `%${search}%`))
-        .limit(1000),
-      newOffset: null,
-      totalProducts: 0
-    };
-  }
-
-  if (offset === null) {
-    return { products: [], newOffset: null, totalProducts: 0 };
-  }
-
-  let totalProducts = await db.select({ count: count() }).from(products);
-  let moreProducts = await db.select().from(products).limit(5).offset(offset);
-  let newOffset = moreProducts.length >= 5 ? offset + 5 : null;
-
-  return {
-    products: moreProducts,
-    newOffset,
-    totalProducts: totalProducts[0].count
-  };
-}
-
-export async function deleteProductById(id: number) {
-  await db.delete(products).where(eq(products.id, id));
-}
