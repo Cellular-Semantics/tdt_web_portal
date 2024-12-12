@@ -11,9 +11,9 @@ import {
 import { MoreHorizontal } from 'lucide-react';
 import { TableCell, TableRow } from '@/components/ui/table';
 import { SelectTaxonomy } from '@/lib/db';
-import { deleteProduct } from './actions';
+// import { deleteProduct } from './actions';
 
-export function Taxonomy({ taxonomy }: { taxonomy: SelectTaxonomy }) {
+export function Taxonomy({ taxonomy, user_email }: { taxonomy: SelectTaxonomy; user_email: string }) {
   const status = taxonomy.is_public == true ? 'public' : 'private'; 
 
   const handleExploreClick = () => {
@@ -24,6 +24,24 @@ export function Taxonomy({ taxonomy }: { taxonomy: SelectTaxonomy }) {
     const fullUrl = `${baseUrl}/browser/${repoName}/annotation`;
     console.log(fullUrl);
     window.open(fullUrl, '_blank');
+  };
+
+  const handleDelete = async () => {
+    console.log('Deleting taxonomy:', taxonomy.id + ' for user: ' + user_email);
+    const response = await fetch('/api/deleteUserTaxonomy', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ userEmail: user_email, taxonomyId: taxonomy.id }),
+    });
+
+    if (response.ok) {
+      console.log('Taxonomy deleted successfully');
+      window.location.reload(); // Refresh the page
+    } else {
+      console.error('Failed to delete taxonomy');
+    }
   };
 
   return (
@@ -56,7 +74,7 @@ export function Taxonomy({ taxonomy }: { taxonomy: SelectTaxonomy }) {
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
             <DropdownMenuItem>Edit</DropdownMenuItem>
             <DropdownMenuItem>
-              <form action={deleteProduct}>
+              <form onSubmit={(e) => { e.preventDefault(); handleDelete(); }}>
                 <button type="submit">Delete</button>
               </form>
             </DropdownMenuItem>

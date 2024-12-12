@@ -209,3 +209,14 @@ export async function addUserTaxonomy(userEmail: string, taxonomyId: number) {
   });
 }
 
+export async function deleteUserTaxonomy(userEmail: string, taxonomyId: number) {
+  await db
+    .delete(user_taxonomies)
+    .where(
+      and(
+        eq(user_taxonomies.user_email, userEmail),
+        eq(user_taxonomies.taxonomy_id, taxonomyId)
+      )
+    );
+}
+

@@ -33,6 +33,7 @@ export default async function TaxonomiesPage(
       <TabsContent value="all">
         <TaxonomiesTable
           taxonomies={taxonomies}
+          user_email={userEmail}
           offset={newOffset ?? 0}
           totalTaxonomies={totalTaxonomies}
         />

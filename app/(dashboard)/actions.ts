@@ -1,10 +1,11 @@
 'use server';
 
-import { deleteProductById } from '@/lib/db';
+import { deleteUserTaxonomy } from '@/lib/db';
 import { revalidatePath } from 'next/cache';
 
-export async function deleteProduct(formData: FormData) {
-  // let id = Number(formData.get('id'));
-  // await deleteProductById(id);
-  // revalidatePath('/');
-}
+// export async function deleteTaxonomy(formData: FormData) {
+//   let email = Number(formData.get('email'));
+//   let id = Number(formData.get('taxon_id'));
+//   await deleteUserTaxonomy(id);
+//   revalidatePath('/');
+// }
