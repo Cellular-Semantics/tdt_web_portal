@@ -1,4 +1,5 @@
 module.exports = {
+  basePath: '/tdt',
   images: {
     domains: ["avatars.githubusercontent.com"],
   },
