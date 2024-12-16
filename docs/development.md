@@ -79,6 +79,7 @@ You should now be able to access the application at http://localhost:3000.
 ## Docker Compose
 
 ```
+docker-compose build --no-cache
 docker-compose --env-file ./docker-compose.env up --build
 ```
 
