@@ -63,8 +63,9 @@ EXPOSE 3000
 ENV PORT=3000
 
 # Check these env vars on production
-ENV NEXTAUTH_URL="http://localhost:3000"
-ENV AUTH_TRUST_HOST="http://localhost:3000"
+# ENV NEXTAUTH_URL="http://localhost:3000"
+# ENV AUTH_TRUST_HOST="http://localhost:3000"
+ENV NEXT_PUBLIC_NEXT_CONFIG_BASE_PATH=/tdt
 
 
 # server.js is created by next build from the standalone output
