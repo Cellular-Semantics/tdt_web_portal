@@ -1,5 +1,5 @@
 module.exports = {
-  basePath: '/tdt',
+  basePath: process.env.NEXT_CONFIG_BASE_PATH || '',
   images: {
     domains: ["avatars.githubusercontent.com"],
   },
