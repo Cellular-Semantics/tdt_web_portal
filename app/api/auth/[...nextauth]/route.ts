@@ -6,12 +6,12 @@ import { NextRequest } from 'next/server'
 
 import { handlers } from '@/lib/auth'
 
-const basePath = process.env.NEXT_CONFIG_BASE_PATH ?? ''
+const basePath = process.env.NEXT_PUBLIC_NEXT_CONFIG_BASE_PATH ?? ''
 
-function rewriteRequest(request: NextRequest) {
+async function rewriteRequest(request: NextRequest) {
     let { protocol, host, pathname } = request.nextUrl;
 
-    const headers = request.headers
+    const headers = await request.headers
     // Host rewrite adopted from next-auth/packages/core/src/lib/utils/env.ts:createActionURL
     const detectedHost = headers.get("x-forwarded-host") ?? host
     const detectedProtocol = headers.get("x-forwarded-proto") ?? protocol
@@ -24,9 +24,9 @@ function rewriteRequest(request: NextRequest) {
 }
 
 export async function GET(request: NextRequest) {
-    return await handlers.GET(rewriteRequest(request))
+    return await handlers.GET(await rewriteRequest(request))
 }
 
 export async function POST(request: NextRequest) {
-    return await handlers.POST(rewriteRequest(request))
+    return await handlers.POST(await rewriteRequest(request))
 }

@@ -13,6 +13,8 @@ import { TableCell, TableRow } from '@/components/ui/table';
 import { SelectTaxonomy } from '@/lib/db';
 // import { deleteProduct } from './actions';
 
+const basePath = process.env.NEXT_PUBLIC_NEXT_CONFIG_BASE_PATH ?? ''
+
 export function Taxonomy({ taxonomy, user_email }: { taxonomy: SelectTaxonomy; user_email: string }) {
   const status = taxonomy.is_public == true ? 'public' : 'private'; 
 
@@ -28,7 +30,7 @@ export function Taxonomy({ taxonomy, user_email }: { taxonomy: SelectTaxonomy; u
 
   const handleDelete = async () => {
     console.log('Deleting taxonomy:', taxonomy.id + ' for user: ' + user_email);
-    const response = await fetch('/api/deleteUserTaxonomy', {
+    const response = await fetch(`${basePath}/api/deleteUserTaxonomy`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

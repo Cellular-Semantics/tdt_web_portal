@@ -1,5 +1,5 @@
 module.exports = {
-  basePath: process.env.NEXT_CONFIG_BASE_PATH || '',
+  basePath: process.env.NEXT_PUBLIC_NEXT_CONFIG_BASE_PATH || '',
   images: {
     domains: ["avatars.githubusercontent.com"],
   },

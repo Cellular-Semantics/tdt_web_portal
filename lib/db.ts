@@ -28,6 +28,7 @@ export const taxonomies = pgTable('taxonomies', {
   author_orcid: text('author_orcid'),
   doc_url: text('doc_url'),
   purl: text('purl'),
+  h5ad_url: text('h5ad_url'),
   last_edited: timestamp('last_edited').notNull(),
   active: boolean('active').notNull(),
   is_public: boolean('is_public').notNull()
@@ -162,6 +163,7 @@ export async function getUserTaxonomies(
     author_orcid: result.taxonomies.author_orcid,
     doc_url: result.taxonomies.doc_url,
     purl: result.taxonomies.purl,
+    h5ad_url: result.taxonomies.h5ad_url,
     last_edited: result.taxonomies.last_edited,
     active: result.taxonomies.active,
     is_public: result.taxonomies.is_public,

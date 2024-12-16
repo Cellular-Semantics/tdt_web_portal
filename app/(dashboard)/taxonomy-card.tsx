@@ -9,7 +9,7 @@ import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import { Github, BookOpen, User } from 'lucide-react';
+import { Github, BookOpen, User, Package } from 'lucide-react';
 import Tooltip from '@mui/material/Tooltip';
 
 const warmColors = [
@@ -75,6 +75,15 @@ export function TaxonomyCard({ taxonomy }: { taxonomy: SelectTaxonomy }) {
                 <a href={taxonomy.doc_url} target="_blank" rel="noopener noreferrer">
                     <IconButton aria-label="online documentation">
                         <BookOpen />
+                    </IconButton>
+                </a>
+            </Tooltip>
+            )}
+            {taxonomy.h5ad_url && (
+            <Tooltip title="Download H5AD file">
+                <a href={taxonomy.h5ad_url} target="_blank" rel="noopener noreferrer">
+                    <IconButton aria-label="h5ad file">
+                        <Package />
                     </IconButton>
                 </a>
             </Tooltip>

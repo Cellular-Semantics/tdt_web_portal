@@ -28,10 +28,11 @@ export default function AddTaxonModal({ userEmail }: AddTaxonModalProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [taxonomies, setTaxonomies] = useState<Taxonomy[]>([]);
   const [selectedTaxonomy, setSelectedTaxonomy] = useState<number | null>(null);
-
+  const basePath = process.env.NEXT_PUBLIC_NEXT_CONFIG_BASE_PATH ?? ''
+  
   useEffect(() => {
     async function fetchTaxonomies() {
-      const response = await fetch(`/api/addibleTaxonomies?userEmail=${encodeURIComponent(userEmail)}`);
+      const response = await fetch(`${basePath}/api/addibleTaxonomies?userEmail=${encodeURIComponent(userEmail)}`);
       const taxonomies = await response.json();
       console.log('Fetched taxonomies:', taxonomies);
       setTaxonomies(taxonomies);
@@ -42,7 +43,7 @@ export default function AddTaxonModal({ userEmail }: AddTaxonModalProps) {
   const onAddTaxonomy = async () => {
     if (selectedTaxonomy === null) return;
 
-    const response = await fetch('/api/addUserTaxonomy', {
+    const response = await fetch(`${basePath}/api/addUserTaxonomy`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
