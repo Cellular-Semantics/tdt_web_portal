@@ -49,6 +49,7 @@ services:
       AUTH_GITHUB_ID: ${AUTH_GITHUB_ID}
       AUTH_GITHUB_SECRET: ${AUTH_GITHUB_SECRET}
       NEXT_PUBLIC_TDT_API_URL: http://tdt_backend:8080/api
+      NEXT_PUBLIC_NEXT_CONFIG_BASE_PATH: /tdt
     depends_on:
       - tdt_postgres
       # - tdt_backend
