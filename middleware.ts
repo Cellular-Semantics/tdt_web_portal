@@ -13,6 +13,7 @@ export default auth((req) => {
 
   // This is needed because NextAuth relies on nextUrl.bathPath which doesn't seem to be defined
   if (isProtectedPath && !req.auth) {
+    console.log('Redirecting to login:', req.nextUrl.origin + basePath)
     return NextResponse.redirect(
       `${req.nextUrl.origin}${basePath}/login`
     )
