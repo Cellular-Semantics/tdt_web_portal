@@ -9,21 +9,38 @@ import { handlers } from '@/lib/auth'
 const basePath = process.env.NEXT_PUBLIC_NEXT_CONFIG_BASE_PATH ?? ''
 const host_protocol = process.env.NEXT_PUBLIC_HOST_PROTOCOL ?? 'http'
 
-async function rewriteRequest(request: NextRequest) {
-    let { protocol, host, pathname } = request.nextUrl;
+// async function rewriteRequest(request: NextRequest) {
+//     let { protocol, host, pathname } = request.nextUrl;
 
-    const headers = await request.headers
-    // Host rewrite adopted from next-auth/packages/core/src/lib/utils/env.ts:createActionURL
-    const detectedHost = headers.get("x-forwarded-host") ?? host
-    const detectedProtocol = headers.get("x-forwarded-proto") ?? protocol
-    const _protocol = detectedProtocol.endsWith(":")
-        ? detectedProtocol
-        : detectedProtocol + ":";
-    // const url = new URL(`${_protocol}//${detectedHost}${basePath}${pathname}${request.nextUrl.search}`)
-    const url = new URL(`${host_protocol}://${detectedHost}${basePath}${pathname}${request.nextUrl.search}`)
+//     const headers = await request.headers
+//     // Host rewrite adopted from next-auth/packages/core/src/lib/utils/env.ts:createActionURL
+//     const detectedHost = headers.get("x-forwarded-host") ?? host
+//     const detectedProtocol = headers.get("x-forwarded-proto") ?? protocol
+//     const _protocol = detectedProtocol.endsWith(":")
+//         ? detectedProtocol
+//         : detectedProtocol + ":";
+//     const url = new URL(`${_protocol}//${detectedHost}${basePath}${pathname}${request.nextUrl.search}`)
+//     // const url = new URL(`${host_protocol}://${detectedHost}${basePath}${pathname}${request.nextUrl.search}`)
+//     console.log('urlx:', url)
+
+//     return new NextRequest(url, request)
+// }
+
+async function rewriteRequest(req: NextRequest) {
+	if (process.env.AUTH_TRUST_HOST !== 'true') return req
+	const proto = req.headers.get('x-forwarded-proto')
+	const host = req.headers.get('x-forwarded-host')
+	if (!proto || !host) {
+		console.warn("Missing x-forwarded-proto or x-forwarded-host headers.")
+		return req
+	}
+	const envOrigin = `${proto}://${host}`
+	const { href, origin } = req.nextUrl
+    const url = href.replace(origin, envOrigin)
     console.log('urlx:', url)
-
-    return new NextRequest(url, request)
+    console.log('originx:', origin)
+    console.log('envOriginx:', envOrigin)
+	return new NextRequest(url, req)
 }
 
 export async function GET(request: NextRequest) {
