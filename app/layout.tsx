@@ -19,7 +19,7 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className="flex min-h-screen w-full flex-col">
-        <SessionProvider session={session}>
+        <SessionProvider session={session} basePath="/tdt/api/auth">
             {children}
         </SessionProvider>
         </body>

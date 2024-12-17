@@ -36,7 +36,7 @@ const ErrorPage: React.FC<ErrorProps> = ({ error, reset }) => {
       <div className="text-center justify-center">
         <div className="flex items-center justify-center" style={{ position: "relative", width: "400px", height: "400px", margin: "auto" }}>
           <Image
-            src="/images/error.png"
+            src="/tdt/images/error.png"
             alt="Error Image"
             layout="fill"
             objectFit="contain"
