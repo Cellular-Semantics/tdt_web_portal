@@ -7,6 +7,7 @@ import { NextRequest } from 'next/server'
 import { handlers } from '@/lib/auth'
 
 const basePath = process.env.NEXT_PUBLIC_NEXT_CONFIG_BASE_PATH ?? ''
+const host_protocol = process.env.NEXT_PUBLIC_HOST_PROTOCOL ?? 'http'
 
 async function rewriteRequest(request: NextRequest) {
     let { protocol, host, pathname } = request.nextUrl;
@@ -18,7 +19,9 @@ async function rewriteRequest(request: NextRequest) {
     const _protocol = detectedProtocol.endsWith(":")
         ? detectedProtocol
         : detectedProtocol + ":";
-    const url = new URL(`${_protocol}//${detectedHost}${basePath}${pathname}${request.nextUrl.search}`)
+    // const url = new URL(`${_protocol}//${detectedHost}${basePath}${pathname}${request.nextUrl.search}`)
+    const url = new URL(`${host_protocol}://${detectedHost}${basePath}${pathname}${request.nextUrl.search}`)
+    console.log('urlx:', url)
 
     return new NextRequest(url, request)
 }

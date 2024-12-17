@@ -78,6 +78,8 @@ You should now be able to access the application at http://localhost:3000.
 
 ## Docker Compose
 
+check `.env` file for build and runtime args. Should be same with `./docker-compose.env`. Next.js needs those args both at build time and runtime.
+
 ```
 docker-compose build --no-cache
 docker-compose --env-file ./docker-compose.env up --build
