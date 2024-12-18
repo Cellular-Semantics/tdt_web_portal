@@ -23,6 +23,9 @@ export default auth((req) => {
     // const redirectResponse = NextResponse.redirect(redirectUrl);
     const redirectResponse = NextResponse.redirect("https://cellular-semantics.sanger.ac.uk/tdt/login/");
     redirectResponse.headers.set('x-middleware-cache', 'no-cache'); // ! FIX: Disable caching
+    redirectResponse.headers.set("x-forwarded-proto", "https");
+    redirectResponse.headers.set("x-forwarded-port", "");
+    redirectResponse.headers.set("location", "");
     redirectResponse.headers.forEach((value, key) => {
       console.log(`headers: ${key}: ${value}`);
     });
