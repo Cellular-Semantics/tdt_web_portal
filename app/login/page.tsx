@@ -28,7 +28,8 @@ export default function LoginPage() {
             action={async () => {
               'use server';
               await signIn('github', {
-                redirectTo: `${originInternal}${basePath}/taxonomies`
+                // redirectTo: `${originInternal}${basePath}/taxonomies`
+                redirectTo: 'http://0.0.0.0:3030/tdt/taxonomies'
               });
             }}
             className="w-full"
