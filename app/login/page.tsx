@@ -27,11 +27,10 @@ export default function LoginPage() {
           <form
             action={async () => {
               'use server';
-              await signIn('github');
-              // await signIn('github', {
-              //   // redirectTo: `${originInternal}${basePath}/taxonomies`
-              //   redirectTo: 'https://cellular-semantics.sanger.ac.uk/tdt/taxonomies'
-              // });
+              await signIn('github', {
+                // redirectTo: `${originInternal}${basePath}/taxonomies`
+                callbackUrl: '/tdt/taxonomies'
+              });
             }}
             className="w-full"
           >
