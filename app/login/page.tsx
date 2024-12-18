@@ -11,6 +11,7 @@ import { Github, ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
 
 const basePath = process.env.NEXT_PUBLIC_NEXT_CONFIG_BASE_PATH ?? ''
+const originInternal = process.env.NEXT_PUBLIC_ORIGIN_INTERNAL
 
 export default function LoginPage() {
   return (
@@ -27,7 +28,7 @@ export default function LoginPage() {
             action={async () => {
               'use server';
               await signIn('github', {
-                redirectTo: `${basePath}/taxonomies`
+                redirectTo: `${originInternal}${basePath}/taxonomies`
               });
             }}
             className="w-full"

@@ -2,6 +2,7 @@ import { auth } from '@/lib/auth'
 import { NextResponse } from "next/server.js"
  
 const basePathEnv = process.env.NEXT_PUBLIC_NEXT_CONFIG_BASE_PATH || '';
+const originInternal = process.env.NEXT_PUBLIC_ORIGIN_INTERNAL || '';
 
 export default auth((req) => {
   const protectedPaths = [`${basePathEnv}/taxonomies`, "/taxonomies"];
@@ -18,17 +19,11 @@ export default auth((req) => {
 
   // This is needed because NextAuth relies on nextUrl.bathPath which doesn't seem to be defined
   if (isProtectedPath && !req.auth) {
-    const redirectUrl = new URL(`${basePathEnv}/login/`, origin);
+    const redirectUrl = new URL(`${basePathEnv}/login/`, originInternal);
     console.log('Redirecting to:' + redirectUrl.toString());
-    // const redirectResponse = NextResponse.redirect(redirectUrl);
-    const redirectResponse = NextResponse.redirect("http://0.0.0.0:3000/tdt/login/");
-    redirectResponse.headers.forEach((value, key) => {
-      console.log(`headers: ${key}: ${value}`);
-    });
+    const redirectResponse = NextResponse.redirect(redirectUrl);
+    // const redirectResponse = NextResponse.redirect("http://0.0.0.0:3000/tdt/login/");
     return redirectResponse;
-    // return NextResponse.redirect(
-    //   `${req.nextUrl.origin}${basePathEnv}/login`
-    // )
   }
 })
 
