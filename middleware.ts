@@ -25,7 +25,7 @@ export default auth((req) => {
     redirectResponse.headers.set('x-middleware-cache', 'no-cache'); // ! FIX: Disable caching
     redirectResponse.headers.set("x-forwarded-proto", "https");
     redirectResponse.headers.set("x-forwarded-port", "");
-    redirectResponse.headers.set("location", "");
+    // redirectResponse.headers.set("location", "");
     redirectResponse.headers.forEach((value, key) => {
       console.log(`headers: ${key}: ${value}`);
     });
