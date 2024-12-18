@@ -29,7 +29,7 @@ export default function LoginPage() {
               'use server';
               await signIn('github', {
                 // redirectTo: `${originInternal}${basePath}/taxonomies`
-                redirectTo: 'http://0.0.0.0:3030/tdt/taxonomies'
+                redirectTo: 'https://cellular-semantics.sanger.ac.uk/tdt/taxonomies'
               });
             }}
             className="w-full"
