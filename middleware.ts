@@ -21,11 +21,7 @@ export default auth((req) => {
     const redirectUrl = new URL(`${basePathEnv}/login/`, origin);
     console.log('Redirecting to:' + redirectUrl.toString());
     // const redirectResponse = NextResponse.redirect(redirectUrl);
-    const redirectResponse = NextResponse.redirect("https://cellular-semantics.sanger.ac.uk/tdt/login/");
-    redirectResponse.headers.set('x-middleware-cache', 'no-cache'); // ! FIX: Disable caching
-    redirectResponse.headers.set("x-forwarded-proto", "https");
-    redirectResponse.headers.set("x-forwarded-port", "");
-    // redirectResponse.headers.set("location", "");
+    const redirectResponse = NextResponse.redirect("http://0.0.0.0:3000/tdt/login/");
     redirectResponse.headers.forEach((value, key) => {
       console.log(`headers: ${key}: ${value}`);
     });
