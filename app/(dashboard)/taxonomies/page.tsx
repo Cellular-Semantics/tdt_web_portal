@@ -21,7 +21,7 @@ export default async function TaxonomiesPage(
     Number(offset)
   );
   console.log(session);
-  console.log(taxonomies);
+  // console.log(taxonomies);
   
   return (
     <Tabs defaultValue="all">

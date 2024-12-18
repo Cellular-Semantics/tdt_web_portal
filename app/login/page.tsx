@@ -10,6 +10,8 @@ import { signIn } from '@/lib/auth';
 import { Github, ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
 
+const basePath = process.env.NEXT_PUBLIC_NEXT_CONFIG_BASE_PATH ?? ''
+
 export default function LoginPage() {
   return (
     <div className="min-h-screen flex flex-col justify-center items-center p-8">
@@ -25,7 +27,7 @@ export default function LoginPage() {
             action={async () => {
               'use server';
               await signIn('github', {
-                redirectTo: '/'
+                redirectTo: `${basePath}/taxonomies`
               });
             }}
             className="w-full"
