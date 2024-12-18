@@ -20,8 +20,10 @@ export default auth((req) => {
   if (isProtectedPath && !req.auth) {
     const redirectUrl = new URL(`${basePathEnv}/login/`, origin);
     console.log('Redirecting to:' + redirectUrl.toString());
-    const redirectResponse = NextResponse.redirect(redirectUrl);
+    // const redirectResponse = NextResponse.redirect(redirectUrl);
+    const redirectResponse = NextResponse.redirect("https://cellular-semantics.sanger.ac.uk/tdt/login/");
     redirectResponse.headers.set('x-middleware-cache', 'no-cache'); // ! FIX: Disable caching
+    console.log('Redirect headers: ' + redirectResponse.headers);
     return redirectResponse;
     // return NextResponse.redirect(
     //   `${req.nextUrl.origin}${basePathEnv}/login`
