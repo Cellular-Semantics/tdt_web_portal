@@ -18,7 +18,7 @@ export default auth((req) => {
 
   // This is needed because NextAuth relies on nextUrl.bathPath which doesn't seem to be defined
   if (isProtectedPath && !req.auth) {
-    const redirectUrl = new URL(`${basePathEnv}/login`, origin);
+    const redirectUrl = new URL(`${basePathEnv}/login`, "http://localhost:3000");
     console.log('Redirecting to:' + redirectUrl.toString());
     const redirectResponse = NextResponse.redirect(redirectUrl);
     redirectResponse.headers.set('x-middleware-cache', 'no-cache'); // ! FIX: Disable caching
