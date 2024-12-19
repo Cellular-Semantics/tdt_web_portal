@@ -29,7 +29,7 @@ export default function LoginPage() {
               'use server';
               await signIn('github', {
                 // redirectTo: `${originInternal}${basePath}/taxonomies`
-                callbackUrl: 'http://172.27.20.150:3000/tdt/taxonomies'
+                redirectTo: '/tdt/taxonomies'
               });
             }}
             className="w-full"
