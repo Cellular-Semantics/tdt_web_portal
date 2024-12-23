@@ -20,7 +20,7 @@ export default auth((req: { nextUrl: { pathname: any; search?: any; origin?: any
 
   // This is needed because NextAuth relies on nextUrl.bathPath which doesn't seem to be defined
   if (isProtectedPath && !req.auth) {
-    const redirectUrl = new URL(`${basePathEnv}/login/`, originInternal);
+    const redirectUrl = new URL(`${basePathEnv}/login/`, origin);
     console.log('Redirecting to:' + redirectUrl.toString());
     const redirectResponse = NextResponse.redirect(redirectUrl);
     // const redirectResponse = NextResponse.redirect("http://0.0.0.0:3000/tdt/login/");
