@@ -12,6 +12,7 @@ export default auth((req: { nextUrl: { pathname: any; search?: any; origin?: any
   console.log("Request search: " + search);
   console.log("Request origin: " + origin);
   console.log("Request basePath: " + basePath);
+  console.log("Request basePathEnv: " + basePathEnv);
   // Check if the current path is protected
   const isProtectedPath = protectedPaths.some((path) =>
     req.nextUrl.pathname.startsWith(path)
