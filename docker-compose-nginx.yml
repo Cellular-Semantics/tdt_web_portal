@@ -1,0 +1,87 @@
+version: '3.8'
+
+services:
+  tdt_postgres:
+    image: postgres:latest
+    container_name: tdt_postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: tdt_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./docs/sql_taxonomies_insert.sql:/docker-entrypoint-initdb.d/sql_taxonomies_insert.sql
+      - ./docs/sql_user_taxonomies_insert.sql:/docker-entrypoint-initdb.d/sql_user_taxonomies_insert.sql
+    networks:
+      - tdt_network
+
+  tdt_pgadmin:
+    image: dpage/pgadmin4
+    container_name: tdt_pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
+    ports:
+      - "5050:80"
+    volumes:
+      # Session data, user files, config files, config database go here.
+      - pgadmin_data:/var/lib/pgadmin
+    depends_on:
+      - tdt_postgres
+    networks:
+      - tdt_network
+
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: tdt_web_portal
+    environment:
+      POSTGRES_URL: postgresql://postgres:${POSTGRES_PASSWORD}@tdt_postgres:5432/tdt_db
+      # NEXTAUTH_URL: ${NEXTAUTH_URL:-http://localhost:3000}
+      AUTH_TRUST_HOST: ${NEXTAUTH_URL:-true}
+      AUTH_SECRET: ${NEXTAUTH_SECRET}
+      NEXTAUTH_SECRET: ${NEXTAUTH_SECRET}
+      AUTH_GITHUB_ID: ${AUTH_GITHUB_ID}
+      AUTH_GITHUB_SECRET: ${AUTH_GITHUB_SECRET}
+      NEXT_PUBLIC_TDT_API_URL: ${NEXT_PUBLIC_TDT_API_URL}
+      NEXT_PUBLIC_NEXT_CONFIG_BASE_PATH: ${NEXT_PUBLIC_NEXT_CONFIG_BASE_PATH:-/tdt}
+    depends_on:
+      - tdt_postgres
+      - tdt_backend
+    networks:
+      - tdt_network
+
+  tdt_backend:
+    image: ghcr.io/brain-bican/tdt-cloud
+    container_name: tdt_backend
+    volumes:
+      - tdt_backend_data:/code/taxonomies
+    environment:
+      GITHUB_TOKEN: ${GITHUB_TOKEN}
+      ADMIN_SECRET: ${ADMIN_SECRET}
+    networks:
+      - tdt_network
+
+  nginx:
+    image: nginx:latest
+    container_name: tdt_nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - web
+    networks:
+      - tdt_network
+
+volumes:
+  postgres_data:
+  pgadmin_data:
+  tdt_backend_data:
+
+networks:
+  tdt_network:
+    driver: bridge

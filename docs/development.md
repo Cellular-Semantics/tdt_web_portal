@@ -16,6 +16,9 @@ Technology stack:
 
 Follow these steps to create and configure the GitHub OAuth: https://authjs.dev/guides/configuring-github
 
+GitHub Authorization callback URL (dev): http://localhost:3000/tdt/api/auth/callback/github
+
+
 # PostgeSQL
 
 Run postgres:
@@ -98,3 +101,25 @@ docker build --no-cache -t tdt_portal .
 ```
 docker run -p 3000:3000 -e POSTGRES_URL='postgresql://postgres:PASSWORD_HERE@host.docker.internal:5432/tdt_db' tdt_portal 
 ```
+
+## Docker Compose (with nginx)
+
+check `.env` file for build and runtime args. Should be same with `./docker-compose.env`. Next.js needs those args both at build time and runtime.
+
+```
+docker-compose -f docker-compose-nginx.yml build --no-cache
+docker-compose -f docker-compose-nginx.yml --env-file ./docker-compose-nginx.env up --build
+
+docker-compose -f docker-compose-nginx.yml down 
+```
+
+docker-compose-nginx.env
+```
+NEXT_PUBLIC_TDT_API_URL=http://localhost/backend/api
+```
+
+frontend= http://localhost/tdt
+backend= http://localhost/backend/   
+
+Test:
+http://localhost/backend/api/taxonomies
