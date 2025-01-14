@@ -19,7 +19,6 @@ export function Taxonomy({ taxonomy, user_email }: { taxonomy: SelectTaxonomy; u
   const status = taxonomy.is_public == true ? 'public' : 'private'; 
 
   const handleExploreClick = () => {
-    // const baseUrl = process.env.TDT_API_URL;
     const baseUrl = process.env.NEXT_PUBLIC_TDT_API_URL;
     const repoUrl = taxonomy.repo_url;
     const repoName = repoUrl.split('/').pop();

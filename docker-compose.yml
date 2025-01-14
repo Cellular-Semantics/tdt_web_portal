@@ -48,28 +48,31 @@ services:
       NEXTAUTH_SECRET: ${NEXTAUTH_SECRET}
       AUTH_GITHUB_ID: ${AUTH_GITHUB_ID}
       AUTH_GITHUB_SECRET: ${AUTH_GITHUB_SECRET}
-      NEXT_PUBLIC_TDT_API_URL: http://tdt_backend:8080/api
+      NEXT_PUBLIC_TDT_API_URL: ${NEXT_PUBLIC_TDT_API_URL}
       NEXT_PUBLIC_NEXT_CONFIG_BASE_PATH: ${NEXT_PUBLIC_NEXT_CONFIG_BASE_PATH:-/tdt}
     depends_on:
       - tdt_postgres
-      # - tdt_backend
+      - tdt_backend
     networks:
       - tdt_network
 
-  # tdt_backend:
-  #   image: ghcr.io/brain-bican/tdt-cloud:1.0.0
-  #   container_name: tdt_backend
-  #   ports:
-  #     - "8484:8080"
-  #   volumes:
-  #     - tdt_backend_data:/code/taxonomies
-  #   networks:
-  #     - tdt_network
+  tdt_backend:
+    image: ghcr.io/brain-bican/tdt-cloud
+    container_name: tdt_backend
+    ports:
+      - "8484:8080"
+    volumes:
+      - tdt_backend_data:/code/taxonomies
+    environment:
+      GITHUB_TOKEN: ${GITHUB_TOKEN}
+      ADMIN_SECRET: ${ADMIN_SECRET}
+    networks:
+      - tdt_network
 
 volumes:
   postgres_data:
   pgadmin_data:
-  # tdt_backend_data:
+  tdt_backend_data:
 
 networks:
   tdt_network:
