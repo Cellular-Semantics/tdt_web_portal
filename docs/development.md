@@ -90,18 +90,6 @@ docker-compose --env-file ./docker-compose.env up --build
 
 use `--detach` to run containers in the background.
 
-## Docker (tdt_web_portal only)
-
-To build and deploy the docker image follow these steps:
-
-```
-docker build --no-cache -t tdt_portal .
-```
-
-```
-docker run -p 3000:3000 -e POSTGRES_URL='postgresql://postgres:PASSWORD_HERE@host.docker.internal:5432/tdt_db' tdt_portal 
-```
-
 ## Docker Compose (with nginx)
 
 check `.env` file for build and runtime args. Should be same with `./docker-compose.env`. Next.js needs those args both at build time and runtime.
@@ -123,3 +111,15 @@ backend= http://localhost/backend/
 
 Test:
 http://localhost/backend/api/taxonomies
+
+## Docker (tdt_web_portal only)
+
+To build and deploy the docker image follow these steps:
+
+```
+docker build --no-cache -t tdt_portal .
+```
+
+```
+docker run -p 3000:3000 -e POSTGRES_URL='postgresql://postgres:PASSWORD_HERE@host.docker.internal:5432/tdt_db' tdt_portal 
+```

@@ -57,7 +57,7 @@ services:
       - tdt_network
 
   tdt_backend:
-    image: ghcr.io/brain-bican/tdt-cloud
+    image: ghcr.io/cellular-semantics/taxonomy-development-tools-cloud:1.0.0
     container_name: tdt_backend
     ports:
       - "8484:8080"
