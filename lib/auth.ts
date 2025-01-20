@@ -12,4 +12,17 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     // how long (seconds) a user's session is valid before expiring
     maxAge: 432000, // 5days
   },
+  callbacks: {
+    async redirect({ url, baseUrl }) {
+      // Allows relative callback URLs
+      // if (url.startsWith("/")) return `${baseUrl}${url}`
+
+      // Allows callback URLs on the same origin
+      // if (new URL(url).origin === baseUrl) return url
+      console.log('gh Redirecting to url:' + url);
+      console.log('gh Redirecting to baseUrl:' + baseUrl);
+
+     return url
+   }
+ }
 }satisfies NextAuthConfig);

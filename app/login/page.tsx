@@ -7,6 +7,7 @@ import {
   CardTitle
 } from '@/components/ui/card';
 import { signIn } from '@/lib/auth';
+// import { signIn } from "next-auth/react";
 import { Github, ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
 
@@ -29,7 +30,7 @@ export default function LoginPage() {
               'use server';
               await signIn('github', {
                 // redirectTo: `${originInternal}${basePath}/taxonomies`
-                redirectTo: 'https://cellular-semantics.sanger.ac.uk/tdt/taxonomies',
+                redirectTo: '/tdt/taxonomies',
                 redirect: true
               });
               // await signIn('github');
