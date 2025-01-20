@@ -27,14 +27,14 @@ export default auth((req: { nextUrl: { pathname: any; search?: any; origin?: any
     console.log('Redirecting to:' + redirectUrl.toString());
     // const redirectResponse = NextResponse.redirect(redirectUrl);
     // const redirectResponse = NextResponse.redirect("http://0.0.0.0:3000/tdt/login/", 301);
-    const redirectResponse = NextResponse.redirect("https://cellular-semantics.sanger.ac.uk/tdt/login/");
-    console.log('Redirect to:' + "https://cellular-semantics.sanger.ac.uk/tdt/login/");
-    // Redirect with a manual Location header (307 Temporary Redirect)
-    // const newUrl = new URL(`${basePathEnv}/login/`, "https://cellular-semantics.sanger.ac.uk"); // Create from the current request URL
-    // newUrl.pathname = `${basePathEnv}/login/`
-    // console.log('Rewrite to:' + newUrl.toString());
-    // return NextResponse.rewrite(newUrl);
-    return redirectResponse;
+    // const redirectResponse = NextResponse.redirect("https://cellular-semantics.sanger.ac.uk/tdt/login/");
+    // console.log('Redirect to:' + "https://cellular-semantics.sanger.ac.uk/tdt/login/");
+
+    const newUrl = new URL(`${basePathEnv}/login/`, "https://cellular-semantics.sanger.ac.uk"); 
+    newUrl.pathname = `${basePathEnv}/login/`
+    console.log('Rewrite to:' + newUrl.toString());
+    return NextResponse.rewrite(newUrl);
+    // return redirectResponse;
   }
 })
 
