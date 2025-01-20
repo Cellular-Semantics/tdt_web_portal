@@ -18,18 +18,22 @@ export default auth((req: { nextUrl: { pathname: any; search?: any; origin?: any
     req.nextUrl.pathname.startsWith(path)
   );
 
-  console.log('Experiment custom headers');
+  console.log('Experiment rewrite');
   // This is needed because NextAuth relies on nextUrl.bathPath which doesn't seem to be defined
+  console.log("isProtectedPath: " + isProtectedPath);
+  console.log("req.auth: " + req.auth);
   if (isProtectedPath && !req.auth) {
     const redirectUrl = new URL(`${basePathEnv}/login/`, origin);
     console.log('Redirecting to:' + redirectUrl.toString());
     // const redirectResponse = NextResponse.redirect(redirectUrl);
     // const redirectResponse = NextResponse.redirect("http://0.0.0.0:3000/tdt/login/", 301);
+    const redirectResponse = NextResponse.redirect("https://cellular-semantics.sanger.ac.uk/tdt/login/");
+    console.log('Redirect to:' + "https://cellular-semantics.sanger.ac.uk/tdt/login/");
     // Redirect with a manual Location header (307 Temporary Redirect)
-    const redirectResponse = new NextResponse(null, {
-      headers: { Location: 'https://cellular-semantics.sanger.ac.uk/tdt/login/' },
-      status: 307,
-    });
+    // const newUrl = new URL(`${basePathEnv}/login/`, "https://cellular-semantics.sanger.ac.uk"); // Create from the current request URL
+    // newUrl.pathname = `${basePathEnv}/login/`
+    // console.log('Rewrite to:' + newUrl.toString());
+    // return NextResponse.rewrite(newUrl);
     return redirectResponse;
   }
 })
