@@ -29,7 +29,7 @@ export default function LoginPage() {
               'use server';
               await signIn('github', {
                 // redirectTo: `${originInternal}${basePath}/taxonomies`
-                redirectTo: '/tdt/taxonomies',
+                redirectTo: '/taxonomies',
                 redirect: true
               });
               // await signIn('github');
