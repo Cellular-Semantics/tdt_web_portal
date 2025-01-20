@@ -5,7 +5,7 @@ const basePathEnv = process.env.NEXT_PUBLIC_NEXT_CONFIG_BASE_PATH || '';
 const originInternal = process.env.NEXT_PUBLIC_ORIGIN_INTERNAL || '';
 
 export default auth((req: { nextUrl: { pathname: any; search?: any; origin?: any; basePath?: any; }; auth: any; }) => {
-  const protectedPaths = [`${basePathEnv}/taxonomies`, "/taxonomies", `${basePathEnv}/mytaxonomies`, "/mytaxonomies"];
+  const protectedPaths = [`${basePathEnv}/taxonomies`, "/taxonomies"];
 
   const { pathname, search, origin, basePath } = req.nextUrl;
   console.log("Request pathname: " + pathname);
@@ -30,10 +30,10 @@ export default auth((req: { nextUrl: { pathname: any; search?: any; origin?: any
     // const redirectResponse = NextResponse.redirect("https://cellular-semantics.sanger.ac.uk/tdt/login/");
     // console.log('Redirect to:' + "https://cellular-semantics.sanger.ac.uk/tdt/login/");
 
-    const newUrl = new URL(`${basePathEnv}/login/`, "https://cellular-semantics.sanger.ac.uk"); 
-    newUrl.pathname = `${basePathEnv}/login/`
-    console.log('Rewrite to:' + newUrl.toString());
-    return NextResponse.rewrite(newUrl);
+    // const newUrl = new URL(`${basePathEnv}/login/`, "https://cellular-semantics.sanger.ac.uk"); 
+    redirectUrl.pathname = `${basePathEnv}/login/`
+    console.log('Rewrite to:' + redirectUrl.toString());
+    return NextResponse.rewrite(redirectUrl);
     // return redirectResponse;
   }
 })

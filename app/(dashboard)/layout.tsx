@@ -80,10 +80,6 @@ function DesktopNav() {
           <Network className="h-5 w-5" />
         </NavItem>
 
-        <NavItem href="/mytaxonomies" label="My Taxonomies 2">
-          <Network className="h-5 w-5" />
-        </NavItem>
-
       </nav>
       <nav className="mt-auto flex flex-col items-center gap-4 px-2 sm:py-5">
         <Tooltip>

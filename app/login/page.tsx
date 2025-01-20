@@ -27,11 +27,11 @@ export default function LoginPage() {
           <form
             action={async () => {
               'use server';
-              await signIn('github', {
-                // redirectTo: `${originInternal}${basePath}/taxonomies`
-                redirectTo: '/tdt/taxonomies'
-              });
-              // await signIn('github');
+              // await signIn('github', {
+              //   // redirectTo: `${originInternal}${basePath}/taxonomies`
+              //   redirectTo: '/tdt/taxonomies'
+              // });
+              await signIn('github');
             }}
             className="w-full"
           >
