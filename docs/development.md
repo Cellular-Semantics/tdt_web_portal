@@ -94,6 +94,17 @@ use `--detach` to run containers in the background.
 
 check `.env` file for build and runtime args. Should be same with `./docker-compose.env`. Next.js needs those args both at build time and runtime.
 
+create https self-signed certificates:
+```
+mkdir ./nginx-selfsigned
+cd ./nginx-selfsigned
+
+openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
+  -keyout selfsigned.key -out selfsigned.crt \
+  -subj "/CN=localhost"
+```
+ mount created `nginx-selfsigned` directory as volume in the docker-compose-nginx.yml.
+
 ```
 docker-compose -f docker-compose-nginx.yml build --no-cache
 docker-compose -f docker-compose-nginx.yml --env-file ./docker-compose-nginx.env up --build

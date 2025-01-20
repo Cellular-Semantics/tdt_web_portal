@@ -38,6 +38,8 @@ services:
       context: .
       dockerfile: Dockerfile
     container_name: tdt_web_portal
+    ports:
+      - "3000:3000"
     environment:
       POSTGRES_URL: postgresql://postgres:${POSTGRES_PASSWORD}@tdt_postgres:5432/tdt_db
       # NEXTAUTH_URL: ${NEXTAUTH_URL:-http://localhost:3000}
@@ -57,6 +59,8 @@ services:
   tdt_backend:
     image: ghcr.io/brain-bican/tdt-cloud
     container_name: tdt_backend
+    ports:
+      - "8484:8080"
     volumes:
       - tdt_backend_data:/code/taxonomies
     environment:
@@ -70,8 +74,10 @@ services:
     container_name: tdt_nginx
     ports:
       - "80:80"
+      - "443:443"
     volumes:
       - ./nginx.conf:/etc/nginx/conf.d/default.conf
+      - /Users/hk9//nginx-selfsigned:/etc/nginx/ssl
     depends_on:
       - web
     networks:
@@ -85,3 +91,4 @@ volumes:
 networks:
   tdt_network:
     driver: bridge
+    external: false
