@@ -23,7 +23,7 @@ export default auth((req: { nextUrl: { pathname: any; search?: any; origin?: any
     const redirectUrl = new URL(`${basePathEnv}/login/`, origin);
     console.log('Redirecting to:' + redirectUrl.toString());
     // const redirectResponse = NextResponse.redirect(redirectUrl);
-    const redirectResponse = NextResponse.redirect("http://web:3000/tdt/login/", 301);
+    const redirectResponse = NextResponse.redirect("http://0.0.0.0:3000/tdt/login/", 301);
     return redirectResponse;
   }
 })
