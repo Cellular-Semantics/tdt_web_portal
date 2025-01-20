@@ -32,7 +32,7 @@ export default auth((req: { nextUrl: { pathname: any; search?: any; origin?: any
 
     // const newUrl = new URL(`${basePathEnv}/login/`, "https://cellular-semantics.sanger.ac.uk"); 
     redirectUrl.pathname = `${basePathEnv}/login/`
-    console.log('Rewrite to:' + redirectUrl.toString());
+    console.log('Rewrite to 2:' + redirectUrl.toString());
     return NextResponse.rewrite(redirectUrl);
     // return redirectResponse;
   }
