@@ -29,10 +29,10 @@ export default auth((req: { nextUrl: { pathname: any; search?: any; origin?: any
     // const redirectResponse = NextResponse.redirect("http://0.0.0.0:3000/tdt/login/", 301);
     // const redirectResponse = NextResponse.redirect("https://cellular-semantics.sanger.ac.uk/tdt/login/");
     // console.log('Redirect to:' + "https://cellular-semantics.sanger.ac.uk/tdt/login/");
-
-    // const newUrl = new URL(`${basePathEnv}/login/`, "https://cellular-semantics.sanger.ac.uk"); 
+ 
+    // rewrite (instead of redirect) to avoid port 10235 issue
     redirectUrl.pathname = `${basePathEnv}/login/`
-    console.log('Rewrite to 2:' + redirectUrl.toString());
+    console.log('Rewrite to:' + redirectUrl.toString());
     return NextResponse.rewrite(redirectUrl);
     // return redirectResponse;
   }
