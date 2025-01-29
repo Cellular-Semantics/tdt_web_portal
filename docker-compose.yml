@@ -59,7 +59,7 @@ services:
       - tdt_network
 
   tdt_backend:
-    image: ghcr.io/cellular-semantics/taxonomy-development-tools-cloud:1.0.0
+    image: ghcr.io/cellular-semantics/taxonomy-development-tools-cloud
     container_name: tdt_backend
     ports:
       - "8484:8080"
