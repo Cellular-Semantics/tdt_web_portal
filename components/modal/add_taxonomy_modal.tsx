@@ -34,7 +34,7 @@ export default function AddTaxonModal({ userEmail }: AddTaxonModalProps) {
     async function fetchTaxonomies() {
       const response = await fetch(`${basePath}/api/addibleTaxonomies?userEmail=${encodeURIComponent(userEmail)}`);
       const taxonomies = await response.json();
-      console.log('Fetched taxonomies:', taxonomies);
+      // console.log('Fetched taxonomies:', taxonomies);
       setTaxonomies(taxonomies);
     }
     fetchTaxonomies();

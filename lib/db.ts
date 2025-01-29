@@ -15,7 +15,7 @@ import {
 import { count, eq, ilike, sql, and, or, notInArray } from 'drizzle-orm';
 import { createInsertSchema } from 'drizzle-zod';
 
-console.log("connection string: ", process.env.POSTGRES_URL);
+// console.log("connection string: ", process.env.POSTGRES_URL);
 const connection = postgres(process.env.POSTGRES_URL!);
 export const db = drizzle(connection);
 

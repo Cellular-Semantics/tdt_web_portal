@@ -15,8 +15,8 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   callbacks: {
     async redirect({ url, baseUrl }) {
       // This is added to handle port 10235 issue
-      console.log('gh Redirecting to url:' + url);
-      console.log('gh Redirecting to baseUrl:' + baseUrl);
+      // console.log('gh Redirecting to url:' + url);
+      // console.log('gh Redirecting to baseUrl:' + baseUrl);
 
      return url
    }

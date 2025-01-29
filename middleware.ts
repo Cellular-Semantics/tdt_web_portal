@@ -8,23 +8,23 @@ export default auth((req: { nextUrl: { pathname: any; search?: any; origin?: any
   const protectedPaths = [`${basePathEnv}/taxonomies`, "/taxonomies"];
 
   const { pathname, search, origin, basePath } = req.nextUrl;
-  console.log("Request pathname: " + pathname);
-  console.log("Request search: " + search);
-  console.log("Request origin: " + origin);
-  console.log("Request basePath: " + basePath);
-  console.log("Request basePathEnv: " + basePathEnv);
+  // console.log("Request pathname: " + pathname);
+  // console.log("Request search: " + search);
+  // console.log("Request origin: " + origin);
+  // console.log("Request basePath: " + basePath);
+  // console.log("Request basePathEnv: " + basePathEnv);
   // Check if the current path is protected
   const isProtectedPath = protectedPaths.some((path) =>
     req.nextUrl.pathname.startsWith(path)
   );
 
-  console.log('Experiment rewrite');
+  // console.log('Experiment rewrite');
   // This is needed because NextAuth relies on nextUrl.bathPath which doesn't seem to be defined
-  console.log("isProtectedPath: " + isProtectedPath);
-  console.log("req.auth: " + req.auth);
+  // console.log("isProtectedPath: " + isProtectedPath);
+  // console.log("req.auth: " + req.auth);
   if (isProtectedPath && !req.auth) {
     const redirectUrl = new URL(`${basePathEnv}/login/`, origin);
-    console.log('Redirecting to:' + redirectUrl.toString());
+    // console.log('Redirecting to:' + redirectUrl.toString());
     // const redirectResponse = NextResponse.redirect(redirectUrl);
     // const redirectResponse = NextResponse.redirect("http://0.0.0.0:3000/tdt/login/", 301);
     // const redirectResponse = NextResponse.redirect("https://cellular-semantics.sanger.ac.uk/tdt/login/");

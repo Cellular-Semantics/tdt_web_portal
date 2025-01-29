@@ -49,6 +49,8 @@ services:
       AUTH_GITHUB_ID: ${AUTH_GITHUB_ID}
       AUTH_GITHUB_SECRET: ${AUTH_GITHUB_SECRET}
       NEXT_PUBLIC_TDT_API_URL: ${NEXT_PUBLIC_TDT_API_URL}
+      ADMIN_SECRET: ${ADMIN_SECRET}
+      NEXT_PUBLIC_TOKEN_SECRET: ${TOKEN_SECRET}
       NEXT_PUBLIC_NEXT_CONFIG_BASE_PATH: ${NEXT_PUBLIC_NEXT_CONFIG_BASE_PATH:-/tdt}
     depends_on:
       - tdt_postgres
@@ -66,6 +68,7 @@ services:
     environment:
       GITHUB_TOKEN: ${GITHUB_TOKEN}
       ADMIN_SECRET: ${ADMIN_SECRET}
+      TOKEN_SECRET: ${TOKEN_SECRET}
     networks:
       - tdt_network
 

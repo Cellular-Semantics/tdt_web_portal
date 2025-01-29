@@ -11,18 +11,30 @@ import {
 import { MoreHorizontal } from 'lucide-react';
 import { TableCell, TableRow } from '@/components/ui/table';
 import { SelectTaxonomy } from '@/lib/db';
+import { generateToken } from '@/lib/utils';
 // import { deleteProduct } from './actions';
 
 const basePath = process.env.NEXT_PUBLIC_NEXT_CONFIG_BASE_PATH ?? ''
 
-export function Taxonomy({ taxonomy, user_email }: { taxonomy: SelectTaxonomy; user_email: string }) {
+export function Taxonomy({ taxonomy, user_email, user_name }: { taxonomy: SelectTaxonomy; user_email: string; user_name: string }) {
   const status = taxonomy.is_public == true ? 'public' : 'private'; 
 
-  const handleExploreClick = () => {
+  const handleExploreClick = async () => {
     const baseUrl = process.env.NEXT_PUBLIC_TDT_API_URL;
+    const secretKey = process.env.NEXT_PUBLIC_TOKEN_SECRET;
     const repoUrl = taxonomy.repo_url;
     const repoName = repoUrl.split('/').pop();
-    const fullUrl = `${baseUrl}/browser/${repoName}/annotation`;
+    const repoOrg = repoUrl.replace(`/${repoName}`, '').split('/').pop();
+    const session = { 
+      name: user_name, 
+      // email: user_email,
+      repoOrg: repoOrg 
+    };
+    if (!secretKey) {
+      throw new Error('NEXT_PUBLIC_TOKEN_SECRET is not defined');
+    }
+    const token = await generateToken(session, secretKey);
+    const fullUrl = `${baseUrl}/browser/${repoName}/table/annotation?token=${token}`;
     console.log(fullUrl);
     window.open(fullUrl, '_blank');
   };

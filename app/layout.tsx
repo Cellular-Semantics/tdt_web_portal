@@ -2,8 +2,6 @@ import './globals.css';
 import { auth } from '@/lib/auth'
 import { SessionProvider } from 'next-auth/react';
 
-import { Analytics } from '@vercel/analytics/react';
-
 export const metadata = {
   title: 'Taxonomy Development Tools',
   description:
@@ -23,7 +21,6 @@ export default async function RootLayout({
             {children}
         </SessionProvider>
         </body>
-      <Analytics />
     </html>
   );
 }

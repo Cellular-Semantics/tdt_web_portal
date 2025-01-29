@@ -24,11 +24,13 @@ import { Button } from '@/components/ui/button';
 export function TaxonomiesTable({
   taxonomies,
   user_email,
+  user_name,
   offset,
   totalTaxonomies
 }: {
   taxonomies: SelectTaxonomy[];
   user_email: string;
+  user_name: string;
   offset: number;
   totalTaxonomies: number;
 }) {
@@ -65,7 +67,7 @@ export function TaxonomiesTable({
           </TableHeader>
           <TableBody>
             {taxonomies.map((taxonomy) => (
-              <Taxonomy key={taxonomy.id} taxonomy={taxonomy} user_email={user_email} />
+              <Taxonomy key={taxonomy.id} taxonomy={taxonomy} user_email={user_email} user_name={user_name} />
             ))}
           </TableBody>
         </Table>

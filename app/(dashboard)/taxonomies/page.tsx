@@ -16,11 +16,12 @@ export default async function TaxonomiesPage(
   const session = await auth();
   
   const userEmail = session?.user?.email ?? '';
+  const userName = session?.user?.name ?? '';
   const { taxonomies, newOffset, totalTaxonomies } = await getUserTaxonomies(
     userEmail,
     Number(offset)
   );
-  console.log(session);
+  // console.log(session);
   // console.log(taxonomies);
   
   return (
@@ -34,6 +35,7 @@ export default async function TaxonomiesPage(
         <TaxonomiesTable
           taxonomies={taxonomies}
           user_email={userEmail}
+          user_name={userName}
           offset={newOffset ?? 0}
           totalTaxonomies={totalTaxonomies}
         />
