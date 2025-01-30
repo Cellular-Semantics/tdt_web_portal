@@ -16,12 +16,12 @@ export default async function TaxonomiesPage(
   const session = await auth();
   
   const userEmail = session?.user?.email ?? '';
-  const userName = session?.user?.name ?? '';
+  const userName = session?.user?.username ?? '';
   const { taxonomies, newOffset, totalTaxonomies } = await getUserTaxonomies(
     userEmail,
     Number(offset)
   );
-  // console.log(session);
+  // console.log(JSON.stringify(session));
   // console.log(taxonomies);
   
   return (
