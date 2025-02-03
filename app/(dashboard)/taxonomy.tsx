@@ -33,8 +33,19 @@ export function Taxonomy({ taxonomy, user_email, user_name }: { taxonomy: Select
     if (!secretKey) {
       throw new Error('NEXT_PUBLIC_TOKEN_SECRET is not defined');
     }
+
+    // Function to set a cookie
+    function setCookie(name: string, value: string, hours: number) {
+      const date = new Date();
+      date.setTime(date.getTime() + (hours * 60 * 60 * 1000));
+      const expires = "expires=" + date.toUTCString();
+      document.cookie = name + "=" + value + ";" + expires + ";path=/";
+    }
+    
     const token = await generateToken(session, secretKey);
-    const fullUrl = `${baseUrl}/browser/${repoName}/table/annotation?token=${token}`;
+    setCookie("tdtAuthToken", token, 12);
+    // const fullUrl = `${baseUrl}/browser/${repoName}/table/annotation?token=${token}`;
+    const fullUrl = `${baseUrl}/browser/${repoName}/table/annotation`;
     console.log(fullUrl);
     window.open(fullUrl, '_blank');
   };

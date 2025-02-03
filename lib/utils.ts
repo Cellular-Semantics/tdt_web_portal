@@ -24,6 +24,6 @@ export async function generateToken(session: Session, secretKey: string): Promis
 
   return new SignJWT({ ...session })
     .setProtectedHeader({ alg: 'HS256' })
-    .setExpirationTime('1h')
+    .setExpirationTime('12h')
     .sign(key);
 }
