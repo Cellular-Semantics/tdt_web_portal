@@ -106,22 +106,22 @@ VALUES
     'http://cellular-semantics.cog.sanger.ac.uk/public/AIT_MTG.h5ad'
     ),
     (
-    'https://github.com/Cellular-Semantics/nhp_basal_ganglia_macaque_taxonomy', 
-    'AIT117',
-    'NHP Basal Ganglia taxonomy (Macaque)', 
+    'https://github.com/brain-bican/basal_ganglia_macaque_taxonomy', 
+    'AIT119',
+    'Basal Ganglia taxonomy (Macaque)', 
     'Atlas of Macaque basal ganglia, developed in collaboration with the BRAIN Initiative Cell Census Network (BICCN).',
     'https://orcid.org/0000-0002-4436-969X',
-    '',
-    '',
-    'http://cellular-semantics.cog.sanger.ac.uk/public/HMBA_Macaque_BG_082024_AIT_to_CAP_merged.h5ad'
+    'https://purl.brain-bican.org/taxonomy/AIT119',
+    'https://purl.brain-bican.org/taxonomy/AIT119/AIT119.json',
+    'https://hmba-macaque-wg-802451596237-us-west-2.s3.us-west-2.amazonaws.com/Aim1_Atlases/BasalGanglia/Macaque_basalganglia_HMBA_AIT11-9_anno_latest.h5ad'
     ),
     (
-    'https://github.com/Cellular-Semantics/nhp_basal_ganglia_human_taxonomy', 
-    'AIT117',
-    'NHP Basal Ganglia taxonomy (Human)', 
+    'https://github.com/brain-bican/basal_ganglia_human_taxonomy', 
+    'AIT195',
+    'Basal Ganglia taxonomy (Human)', 
     'Atlas of Human basal ganglia, developed in collaboration with the BRAIN Initiative Cell Census Network (BICCN).',
     'https://orcid.org/0000-0002-4436-969X',
-    '',
-    '',
-    'http://cellular-semantics.cog.sanger.ac.uk/public/HMBA_Human_BG_082024_AIT_to_CAP_merged.h5ad'
+    'https://purl.brain-bican.org/taxonomy/AIT195',
+    'https://purl.brain-bican.org/taxonomy/AIT195/AIT195.json',
+    'https://hmba-human-wg-802451596237-us-west-2.s3.us-west-2.amazonaws.com/Aim1_Atlases/BasalGanglia/Human_basalganglia_HMBA_AIT19-5_anno_latest.h5ad'
     );
