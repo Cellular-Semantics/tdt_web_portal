@@ -124,4 +124,14 @@ VALUES
     'https://purl.brain-bican.org/taxonomy/AIT195',
     'https://purl.brain-bican.org/taxonomy/AIT195/AIT195.json',
     'https://hmba-human-wg-802451596237-us-west-2.s3.us-west-2.amazonaws.com/Aim1_Atlases/BasalGanglia/Human_basalganglia_HMBA_AIT19-5_anno_latest.h5ad'
+    ),
+    (
+    'https://github.com/brain-bican/basal_ganglia_consensus_taxonomy', 
+    'CS20250428',
+    'Basal Ganglia consensus taxonomy', 
+    'HMBA basal ganglia consensus taxonomy, developed in collaboration with the BRAIN Initiative Cell Census Network (BICCN).',
+    'https://orcid.org/0000-0002-4436-969X',
+    'https://purl.brain-bican.org/taxonomy/CS20250428',
+    'https://purl.brain-bican.org/taxonomy/CS20250428/CS20250428.json',
+    ''
     );
