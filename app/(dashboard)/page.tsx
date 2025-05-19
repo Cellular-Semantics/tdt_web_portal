@@ -17,7 +17,7 @@ const HomePage = () => {
     <div>
       <div className="flex items-center justify-center h-[calc(100vh-100px)] bg-gradient-to-r from-gray-50 to-gray-400">
         <div className="text-center">
-          <h1 className="text-5xl font-bold text-white mb-4">Taxonomy Development Tools</h1>
+          <h1 className="text-5xl font-bold text-white mb-4">Taxonomy Development Platform</h1>
           <h2 className="text-2xl text-white mb-8">Build, curate, and publish BICAN taxonomies effortlessly.</h2>
           <div className="flex justify-center space-x-4">
             <Link href="/taxonomies" className="px-6 py-3 bg-white text-orange-400 font-semibold rounded-md shadow-md hover:bg-gray-100 transition duration-300 min-w-[150px] text-center">

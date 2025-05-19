@@ -60,9 +60,9 @@ function DesktopNav() {
         >
           {/* <VercelLogo className="h-3 w-3 transition-all group-hover:scale-110" /> */}
           <div className="bg-white rounded-full items-center justify-center">
-            <Image src="/tdt/taxonomy.png" alt="Taxonomy Development Tools" width={32} height={32} className="transition-all group-hover:scale-110 object-cover" />
+            <Image src="/tdt/taxonomy.png" alt="Taxonomy Development Platform" width={32} height={32} className="transition-all group-hover:scale-110 object-cover" />
           </div>
-          <span className="sr-only">TDT</span>
+          <span className="sr-only">TDP</span>
         </Link>
 
         <NavItem href="/" label="Dashboard">

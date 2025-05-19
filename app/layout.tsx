@@ -3,7 +3,7 @@ import { auth } from '@/lib/auth'
 import { SessionProvider } from 'next-auth/react';
 
 export const metadata = {
-  title: 'Taxonomy Development Tools',
+  title: 'Taxonomy Development Platform',
   description:
     'A taxonomy management tool for building, curating and publishing BICAN taxonomies in a collaborative fashion.'
 };
